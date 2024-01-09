@@ -1,5 +1,6 @@
 #include "Account.hpp"
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <ctime>
 
@@ -21,8 +22,7 @@ Account::Account(int initial_deposit)
                 << _accountIndex 
                 << ";amount:" 
                 << _amount 
-                << ";created" 
-                << std::endl;
+                << ";created" << std::endl;
 
     _nbAccounts++;
 }
@@ -144,20 +144,16 @@ void Account::displayStatus(void) const
 }
 
 void Account::_displayTimestamp( void ){
-    //Create a function that displays the time and date in the following order:
-    //Year + Month + Day _ Hour + Minutes + Seconds
+    time_t  now  = time(0);
+    tm*     ltm  = localtime(&now);
 
-    time_t now  = time(0);
-    tm* ltm     = localtime(&now);
-    std::cout   << "[" 
-                << 1900 + ltm->tm_year 
-                << "0" 
-                << 1 + ltm->tm_mon 
-                << "0" 
-                << ltm->tm_mday 
-                << "_" 
-                << ltm->tm_hour 
-                << ltm->tm_min 
-                << ltm->tm_sec 
-                << "] ";
+    std::string  timeStamp =     "[" + 
+                                std::to_string(1900 + ltm->tm_year) + 
+                                "0" + std::to_string(1 + ltm->tm_mon) + 
+                                "0" + std::to_string(ltm->tm_mday) + 
+                                "_" + std::to_string(ltm->tm_hour) + 
+                                std::to_string(ltm->tm_min) + 
+                                std::to_string(ltm->tm_sec) + 
+                                "] ";
+    std::cout << timeStamp;
 }
