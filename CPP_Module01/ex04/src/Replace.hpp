@@ -1,22 +1,14 @@
 #pragma once
-#include <iostream>
 #include <fstream>
+#include <string>
 
+class Replace{
+	public:
+		Replace(std::string fileName);
+		~Replace();
+		int	replacePattern(std::string s1, std::string s2);
 
-bool isInputValid(int argc, char *input[]){
-    std::ifstream sourceFile;
-
-    if (argc != 4)
-    {
-        std::cout << "Error: program must take <filename> followed by <string 1> and <string 2>" << std::endl;
-        return false;
-    }
-    sourceFile.open(input[0]);
-    if (!sourceFile.is_open())
-    {
-        std::cout << "Error: file cannot be opened" << std::endl;
-        return false;
-    }
-    sourceFile.close();
-    return true;
-}
+	private:
+		std::string   	_sourceFile;
+		std::string 	_targetFile;
+};
