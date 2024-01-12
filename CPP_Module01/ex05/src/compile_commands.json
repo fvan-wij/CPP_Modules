@@ -1,0 +1,17 @@
+[
+ {
+  "directory": "/home/flip/Documents/Codam/CPP_Modules/CPP_Module01/ex05",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-std=c++11",
+   "-c",
+   "src/main.cpp",
+   "-o",
+   "obj/main.o"
+  ],
+  "file": "src/main.cpp"
+ }
+]
