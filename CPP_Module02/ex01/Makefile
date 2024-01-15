@@ -2,7 +2,7 @@ NAME		:=	app
 COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp \
-				Harl.cpp \
+				Fixed.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(COMPILER) $^ -o $(NAME)
-	@echo $(Green) $(Bold) C++ ex05 compiled ✅ $(Text_Off)
+	@echo $(Green) $(Bold) C++ ex01 compiled ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	@mkdir -p $(@D) 

@@ -1,6 +1,6 @@
-NAME		:=	app
+NAME		:=	harlFilter
 COMPILER	:=	c++
-FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
+FLAGS		:= 	-Wall -Wextra -Werror -std=c++17
 SRC			:=  main.cpp \
 				Harl.cpp \
 
@@ -17,7 +17,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(COMPILER) $^ -o $(NAME)
-	@echo $(Green) $(Bold) C++ ex05 compiled ✅ $(Text_Off)
+	@echo $(Green) $(Bold) C++ ex06 compiled ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	@mkdir -p $(@D) 
