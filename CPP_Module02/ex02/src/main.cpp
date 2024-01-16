@@ -81,5 +81,11 @@ int main(void)
 	Fixed divide(Fixed(10.05f) / Fixed(2));
 	std::cout << "divide: " << divide << std::endl;
 
+	//Testing Min
+	std::cout << "Fixed::min(mult, divide): " << Fixed::min(mult, divide) << std::endl;
+
+	//Testing Min
+	std::cout << "Fixed::max(add, subtract): " << Fixed::max(add, subtract) << std::endl;
+
 	return (EXIT_SUCCESS);
 }

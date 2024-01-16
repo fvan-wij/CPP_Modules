@@ -43,27 +43,27 @@ Fixed& Fixed::operator= (const Fixed& other){
 	return (*this);
 }
 
-bool Fixed::operator> (const Fixed& other){
+bool Fixed::operator> (const Fixed& other) const{
 	return ((this->toFloat() > other.toFloat()));
 }
 
-bool Fixed::operator< (const Fixed& other){
+bool Fixed::operator< (const Fixed& other) const{
 	return ((this->toFloat() < other.toFloat()));
 }
 
-bool Fixed::operator>= (const Fixed& other){
+bool Fixed::operator>= (const Fixed& other) const{
 	return ((this->toFloat() >= other.toFloat()));
 }
 
-bool Fixed::operator<= (const Fixed& other){
+bool Fixed::operator<= (const Fixed& other) const{
 	return ((this->toFloat() <= other.toFloat()));
 }
 
-bool Fixed::operator== (const Fixed& other){
+bool Fixed::operator== (const Fixed& other) const{
 	return ((this->toFloat() == other.toFloat()));
 }
 
-bool Fixed::operator!= (const Fixed& other){
+bool Fixed::operator!= (const Fixed& other) const{
 	return ((this->toFloat() != other.toFloat()));
 }
 
@@ -148,3 +148,38 @@ int		Fixed::toInt(void) const{
 	return (_fpnVal>>8);
 }
 
+Fixed& Fixed::min(Fixed& a, Fixed& b){
+	if (a < b) {
+		return (a);
+	}
+	else {
+		return (b);
+	}
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b){
+	if (a < b) {
+		return (a);
+	}
+	else {
+		return (b);
+	}
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b){
+	if (a > b) {
+		return (a);
+	}
+	else {
+		return (b);
+	}
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b){
+	if (a > b) {
+		return (a);
+	}
+	else {
+		return (b);
+	}
+}
