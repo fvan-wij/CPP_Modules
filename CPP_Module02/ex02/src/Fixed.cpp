@@ -52,3 +52,17 @@ int	Fixed::getRawBits(void) const{
 void	Fixed::setRawBits(int const raw){
 	_fpnVal = raw;
 }
+
+float	Fixed::toFloat(void){
+	// Do ANDOR operation on _fpnVal, to figure out value of the first 8 bits, save in variable, transnlate to decimal == decimalPart;
+	float decimalPart = _fpnVal & 255;
+	// Bitshift by 8 bits == integerPart
+	int integerPart = _fpnVal>>8;
+	// return integerPart + decimalPart;
+	return ((float)integerPart + decimalPart);
+}
+
+int		Fixed::toInt(void){
+	return (_fpnVal>>8);
+}
+
