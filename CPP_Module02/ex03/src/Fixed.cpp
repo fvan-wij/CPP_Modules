@@ -3,20 +3,25 @@
 #include <cmath>
 
 Fixed::Fixed(){
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 	_fpnVal = 0;
 }
 
 Fixed::Fixed(const int integer){
-	std::cout << "Integer constructor called" << std::endl;
+	// std::cout << "Integer constructor called" << std::endl;
 	_fpnVal = (integer<<_FRACTBITS);
 }
 
 Fixed::Fixed(const float floatingPointNumber){
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 	float 	decimalPart = floatingPointNumber - static_cast<int>(floatingPointNumber);
 	int 	integerPart = floatingPointNumber - decimalPart;
 	int 	fractionalRepresentation = 0;
+	if (decimalPart == 0.0){
+		integerPart = integerPart<<_FRACTBITS;
+		this->setRawBits(integerPart);
+		return;
+	}
 
 	for (size_t i = 0; i < _FRACTBITS; i++){
 		decimalPart *= 2.0;
@@ -35,7 +40,7 @@ Fixed::Fixed(const float floatingPointNumber){
 
 Fixed::Fixed(const Fixed& other){
 	*this = other;
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed& Fixed::operator= (const Fixed& other){
@@ -91,30 +96,29 @@ Fixed  Fixed::operator-- (int){
 	return (old);
 }
 
-float Fixed::operator+ (const Fixed& other){
+Fixed Fixed::operator+ (const Fixed& other){
 	float sum = this->toFloat() + other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+	return (Fixed(sum));
 }
 
-float Fixed::operator- (const Fixed& other){
+Fixed operator+ (const Fixed& c1, const Fixed& c2){
+	float sum = c1.toFloat() + c2.toFloat();
+	return Fixed(sum);
+}
+
+Fixed Fixed::operator- (const Fixed& other){
 	float sum = this->toFloat() - other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+	return (Fixed(sum));
 }
 
-float Fixed::operator* (const Fixed& other){
+Fixed Fixed::operator* (const Fixed& other){
 	float sum = this->toFloat() * other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
-
+	return (Fixed(sum));
 }
 
-float Fixed::operator/ (const Fixed& other){
+Fixed Fixed::operator/ (const Fixed& other){
 	float sum = this->toFloat() / other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
-
+	return (Fixed(sum));
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
@@ -123,11 +127,11 @@ std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
 }
 
 Fixed::~Fixed(){
-	std::cout << "Deconstructor called" << std::endl;
+	// std::cout << "Deconstructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const{
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (_fpnVal);
 }
 

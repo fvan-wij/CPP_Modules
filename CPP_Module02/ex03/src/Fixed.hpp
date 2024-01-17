@@ -10,7 +10,7 @@ class Fixed{
 		Fixed(const Fixed& other);
 
 		//Assignment operator
-		Fixed& operator= (const Fixed& other) const;
+		Fixed& operator= (const Fixed& other);
 
 		//Comparison operators
 		bool operator> (const Fixed& other) const;
@@ -27,10 +27,11 @@ class Fixed{
 		Fixed  operator-- (int);
 
 		//Arithmetic operators
-		float operator+ (const Fixed& other);
-		float operator- (const Fixed& other);
-		float operator* (const Fixed& other);
-		float operator/ (const Fixed& other);
+		Fixed operator+ (const Fixed& other);
+		friend Fixed operator+ (const Fixed& c1, const Fixed& c2);
+		Fixed operator- (const Fixed& other);
+		Fixed operator* (const Fixed& other);
+		Fixed operator/ (const Fixed& other);
 
 		//Insertion operator
 		friend std::ostream& operator<<(std::ostream& os, const Fixed& obj);

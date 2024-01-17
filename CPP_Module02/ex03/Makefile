@@ -3,6 +3,8 @@ COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp \
 				Fixed.cpp \
+				Point.cpp \
+				bsp.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj

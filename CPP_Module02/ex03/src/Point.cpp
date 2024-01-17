@@ -3,29 +3,41 @@
 
 //Constructors
 Point::Point(){
-	_X = Fixed();
-	_Y = Fixed();
+	_X = Fixed(0);
+	_Y = Fixed(0);
 }
 
-Point::Point(Fixed x, Fixed y){
-	_X = x;
-	_Y = y;
+Point::Point(const float x, const float y){
+	_X = Fixed(x);
+	_Y = Fixed(y);
 }
 
-Point::Point(Fixed& other){
+Point::Point(Point& other){
 	*this = other;
 }
 
-Point::Point operator= (Point& other){
-	// _X = other.getX();
-	// _Y = other.getX();
+Point::Point( const Point &src ){
+	_X = src.getX();
+	_Y = src.getY();
 }
 
-Point::~Point();
+Point& Point::operator= (const Point& other){
+	this->_X = other.getX();
+	this->_Y = other.getX();
+	return (*this);
+}
+
+//Destructor
+Point::~Point()
+{
+
+}
 
 //Member functions
-// void	Point::setX(Fixed const x);
-// Fixed&  Point::getX(void) const;	
-//
-// void	Point::setY(Fixed const y);
-// Fixed&  Point::getY(void) const;	
+float  Point::getX(void) const{
+	return (this->_X.toFloat());
+}
+
+float  Point::getY(void) const{
+	return (this->_Y.toFloat());
+}
