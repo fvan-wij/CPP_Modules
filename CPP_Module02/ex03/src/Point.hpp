@@ -6,7 +6,7 @@ class Point{
 		Point();
 		Point(Fixed x, Fixed y);
 		Point(Fixed& other);
-		Point operator= (Fixed& other);
+		Point operator= (Point& other);
 		~Point();
 
 		//Member functions
@@ -17,7 +17,6 @@ class Point{
 		Fixed&  getY(void) const;	
 
 	private:
-		Fixed const _X;
 		Fixed const _Y;
-
+		Fixed const _X;
 };

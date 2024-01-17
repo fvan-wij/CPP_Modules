@@ -9,9 +9,18 @@ Point::Point(){
 
 Point::Point(Fixed x, Fixed y){
 	_X = x;
+	_Y = y;
 }
-Point::Point(Fixed& other);
-Point::Point operator= (Fixed& other);
+
+Point::Point(Fixed& other){
+	*this = other;
+}
+
+Point::Point operator= (Point& other){
+	// _X = other.getX();
+	// _Y = other.getX();
+}
+
 Point::~Point();
 
 //Member functions

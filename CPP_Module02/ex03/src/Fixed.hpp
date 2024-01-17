@@ -10,7 +10,7 @@ class Fixed{
 		Fixed(const Fixed& other);
 
 		//Assignment operator
-		Fixed& operator= (const Fixed& other);
+		Fixed& operator= (const Fixed& other) const;
 
 		//Comparison operators
 		bool operator> (const Fixed& other) const;
