@@ -29,7 +29,7 @@ Fixed::Fixed(const float floatingPointNumber){
 			decimalPart -= 1.0;
 		}
 	}
-	integerPart = integerPart<<_FRACTBITS;
+	integerPart = (integerPart<<_FRACTBITS)+1;
 	this->setRawBits(fractionalRepresentation + integerPart);
 }
 
