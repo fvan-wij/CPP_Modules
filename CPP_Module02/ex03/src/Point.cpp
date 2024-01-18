@@ -23,8 +23,20 @@ Point::Point( const Point &src ){
 
 Point& Point::operator= (const Point& other){
 	this->_X = other.getX();
-	this->_Y = other.getX();
+	this->_Y = other.getY();
 	return (*this);
+}
+
+bool Point::operator== (const Point& other) const{
+	if (this->_X == other.getX() && this->_Y == other.getY())
+		return (true);
+	else
+	 	return (false);
+}
+
+std::ostream& operator<<(std::ostream& os, const Point& p){
+	os << "(" << p.getX() << ", " << p.getY() << ")";
+	return (os);
 }
 
 //Destructor

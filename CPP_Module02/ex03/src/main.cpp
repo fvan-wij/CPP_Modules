@@ -12,13 +12,14 @@ int main(void)
 	Point c(100.0, 100.0);
 
 	// Point point(200.0, 150.0);
-	Point point(200.0, 150.0);
+	Point point(104.0, 101.0);
 
+	std::cout << "Is point" << point << " inside triangle a" << a << ", b" << b << ", c" << c << "?" << std::endl;
 	if (bsp(a, b, c, point)){
-		std::cout << "point is within triangle A-B-C" << std::endl;
+		std::cout << "Yes" << std::endl;
 	}
 	else {
-		std::cout << "point is not within triangle A-B-C" << std::endl;
+		std::cout << "No" << std::endl;
 	}
 	return (EXIT_SUCCESS);
 }

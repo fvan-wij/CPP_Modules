@@ -8,6 +8,8 @@ class Point{
 		Point(Point& other);
 		Point( const Point &src );
 		Point& operator= (const Point& other);
+		bool operator== (const Point& other) const;
+		friend std::ostream& operator<<(std::ostream& os, const Point& p);
 		~Point();
 
 		//Member functions
