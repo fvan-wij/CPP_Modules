@@ -9,7 +9,6 @@ class Point{
 		Point( const Point &src );
 		Point& operator= (const Point& other);
 		bool operator== (const Point& other) const;
-		friend std::ostream& operator<<(std::ostream& os, const Point& p);
 		~Point();
 
 		//Member functions
@@ -22,3 +21,4 @@ class Point{
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);
+std::ostream& operator<<(std::ostream& os, const Point& p);

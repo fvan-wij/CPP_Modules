@@ -28,13 +28,11 @@ class Fixed{
 
 		//Arithmetic operators
 		Fixed operator+ (const Fixed& other);
-		friend Fixed operator+ (const Fixed& c1, const Fixed& c2);
 		Fixed operator- (const Fixed& other);
 		Fixed operator* (const Fixed& other);
 		Fixed operator/ (const Fixed& other);
 
 		//Insertion operator
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& obj);
 
 		//Destructor
 		~Fixed();
@@ -57,3 +55,6 @@ class Fixed{
 		static int constexpr	_FRACTBITS = 8;
 
 };
+
+Fixed operator+ (const Fixed& c1, const Fixed& c2);
+std::ostream& operator<<(std::ostream& os, const Fixed& obj);
