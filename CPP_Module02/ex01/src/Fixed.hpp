@@ -8,7 +8,6 @@ class Fixed{
 		Fixed(const float floatingPointNumber);
 		Fixed(const Fixed& other);
 		Fixed& operator=(const Fixed& other);
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& obj); // Figure out what this is doing under the hood
 		~Fixed();
 
 		int		getRawBits(void) const;
@@ -21,3 +20,5 @@ class Fixed{
 		static int constexpr	_FRACTBITS = 8;
 
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& obj);

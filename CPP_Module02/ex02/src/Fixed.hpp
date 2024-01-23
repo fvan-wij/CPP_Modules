@@ -32,8 +32,6 @@ class Fixed{
 		float operator* (const Fixed& other);
 		float operator/ (const Fixed& other);
 
-		//Insertion operator
-		friend std::ostream& operator<<(std::ostream& os, const Fixed& obj);
 
 		//Destructor
 		~Fixed();
@@ -56,3 +54,5 @@ class Fixed{
 		static int constexpr	_FRACTBITS = 8;
 
 };
+
+std::ostream& operator<<(std::ostream& os, const Fixed& obj);
