@@ -1,6 +1,5 @@
 # Fixed-Point Numbers && Orthodox Canonical Form
 
-
 ## Orthodox Canonical Form
 
 ### Defintion
@@ -78,4 +77,25 @@ E.g., when one presses enter, the buffer gets sent to the program and gets clear
 - The point of flushing IO streams:
 Usually, an explicit flush is necessary before a call to std::sytem, especially if it performs any screen I/O.
 In most other cases, std::endl is redundant and my degrade performance. 
+
+
+## Fixed-Point numbers
+
+Fixed-Point numbers are a balance of performance, accuracy, range and precision.
+In essence, a Fixed-Point number is way for us to represent fractional numbers using bits. 
+We simply reserve a portion of the bits for fractional numbers, which is defined by the binary point. 
+Shifting the binary point, has impact on the precision of Fixed-Point number. 
+
+- Key conccepts
+**Fractional number**
+A number that is fractional, in general, numbers after the decimal point are considered fractional numbers
+
+**Binary point**
+The width or number of bits used to express fractional numbers. The bits that encompass this area are considered binary fractions.
+
+**Raw bits of the Fixed-Point number**
+This is a value that represents the fixed-point number. When you apply some logical operations such as bitshifting, etc. you can convert this to a 
+fractional number.
+
+
 
