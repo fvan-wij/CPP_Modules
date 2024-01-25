@@ -98,4 +98,16 @@ This is a value that represents the fixed-point number. When you apply some logi
 fractional number.
 
 
+## Calculating whether a point is within a triangle
+
+In order to determine whether a point is within a triangle (if a point is on the line, this does not count as 'within')
+, the following statements have to be true:
+1. The point does not lie on one of the three lines of the triangle;
+2. The area of the main triangle is equal to the sum of the area of the three sub-triangles that can be formed;
+
+### 1 -->
+For each line, use algebra to
+
+### 2 --> 
+Area = [x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)] / 2;
 
