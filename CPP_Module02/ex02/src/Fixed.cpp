@@ -1,9 +1,10 @@
 #include "Fixed.hpp"
+#include <cstdio>
 #include <iostream>
 #include <cmath>
 
 Fixed::Fixed(){
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 	_fpnVal = 0;
 }
 
@@ -14,28 +15,13 @@ Fixed::Fixed(const int integer){
 
 Fixed::Fixed(const float floatingPointNumber){
 	std::cout << "Float constructor called" << std::endl;
-	float 	decimalPart = floatingPointNumber - static_cast<int>(floatingPointNumber);
-	int 	integerPart = floatingPointNumber - decimalPart;
-	int 	fractionalRepresentation = 0;
-
-	for (size_t i = 0; i < _FRACTBITS; i++){
-		decimalPart *= 2.0;
-		if (decimalPart == 1.0){
-			fractionalRepresentation += (1<<(7-i));
-			break;
-		}
-		else if ((decimalPart - (decimalPart - static_cast<int>(decimalPart))) == 1.0){
-			fractionalRepresentation += (1<<(7-i));
-			decimalPart -= 1.0;
-		}
-	}
-	integerPart = (integerPart<<_FRACTBITS)+1;
-	this->setRawBits(fractionalRepresentation + integerPart);
+	float fpRepresentation = floatingPointNumber * (1<<_FRACTBITS);
+	this->setRawBits(roundf(fpRepresentation));
 }
 
 Fixed::Fixed(const Fixed& other){
 	*this = other;
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed& Fixed::operator= (const Fixed& other){
@@ -91,30 +77,32 @@ Fixed  Fixed::operator-- (int){
 	return (old);
 }
 
-float Fixed::operator+ (const Fixed& other){
-	float sum = this->toFloat() + other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+Fixed Fixed::operator+ (const Fixed& other){
+	float result;
+
+	result = this->toFloat() + other.toFloat();
+	return (Fixed(result));
 }
 
-float Fixed::operator- (const Fixed& other){
-	float sum = this->toFloat() - other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+Fixed Fixed::operator- (const Fixed& other){
+	float result;
+
+	result = this->toFloat() - other.toFloat();
+	return (Fixed(result));
 }
 
-float Fixed::operator* (const Fixed& other){
-	float sum = this->toFloat() * other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+Fixed Fixed::operator* (const Fixed& other){
+	float result;
 
+	result = this->toFloat() * other.toFloat();
+	return (Fixed(result));
 }
 
-float Fixed::operator/ (const Fixed& other){
-	float sum = this->toFloat() / other.toFloat();
-	*this = Fixed(sum);
-	return (sum);
+Fixed Fixed::operator/ (const Fixed& other){
+	float result;
 
+	result = this->toFloat() / other.toFloat();
+	return (Fixed(result));
 }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
@@ -123,11 +111,11 @@ std::ostream& operator<<(std::ostream& os, const Fixed& obj) {
 }
 
 Fixed::~Fixed(){
-	std::cout << "Deconstructor called" << std::endl;
+	// std::cout << "Deconstructor called" << std::endl;
 }
 
 int	Fixed::getRawBits(void) const{
-	std::cout << "getRawBits member function called" << std::endl;
+	// std::cout << "getRawBits member function called" << std::endl;
 	return (_fpnVal);
 }
 
@@ -136,11 +124,11 @@ void	Fixed::setRawBits(int const raw){
 }
 
 float	Fixed::toFloat(void) const {
-	// Do ANDOR operation on _fpnVal, to figure out value of the first 8 bits, save in variable, transnlate to decimal == decimalPart;
-	float decimalPart = (_fpnVal & 255) / 256.0;
-	// Bitshift by 8 bits == integerPart
-	float integerPart = _fpnVal>>8;
-	// return integerPart + decimalPart;
+	float decimalPart;
+	float integerPart;
+
+	decimalPart	= (_fpnVal & 255) / 256.0;
+	integerPart = _fpnVal>>_FRACTBITS;
 	return (integerPart + decimalPart);
 }
 

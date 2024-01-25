@@ -106,8 +106,10 @@ In order to determine whether a point is within a triangle (if a point is on the
 2. The area of the main triangle is equal to the sum of the area of the three sub-triangles that can be formed;
 
 ### 1 -->
-For each line, use algebra to
-
+To check whether the given point lies on the line, we need  the cross-product of vectors p1 -> point, and p1 -> p2;
+Calculating the cross product = delta x (point, p1) * delta y (p1, p2) - delta y (point, p1) * delta x (p1, p2);
+If (cross product == 0) point lies on the line;
+    
 ### 2 --> 
 Area = [x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)] / 2;
 

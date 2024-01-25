@@ -14,23 +14,9 @@ Fixed::Fixed(const int integer){
 
 Fixed::Fixed(const float floatingPointNumber){
 	std::cout << "Float constructor called" << std::endl;
-	float 	decimalPart = floatingPointNumber - static_cast<int>(floatingPointNumber);
-	int 	integerPart = floatingPointNumber - decimalPart;
-	int 	fractionalRepresentation = 0;
 
-	for (size_t i = 0; i < _FRACTBITS; i++){
-		decimalPart *= 2.0;
-		if (decimalPart == 1.0){
-			fractionalRepresentation += (1<<(7-i));
-			break;
-		}
-		else if ((decimalPart - (decimalPart - static_cast<int>(decimalPart))) == 1.0){
-			fractionalRepresentation += (1<<(7-i));
-			decimalPart -= 1.0;
-		}
-	}
-	integerPart = (integerPart<<_FRACTBITS)+1;
-	this->setRawBits(fractionalRepresentation + integerPart);
+	float fpRepresentation = floatingPointNumber * (1<<_FRACTBITS);
+	this->setRawBits(roundf(fpRepresentation));
 }
 
 Fixed::Fixed(const Fixed& other){

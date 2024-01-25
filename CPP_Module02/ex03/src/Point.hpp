@@ -16,8 +16,8 @@ class Point{
 		float  getY(void) const;	
 
 	private:
-		Fixed _Y;
-		Fixed _X;
+		const Fixed _X;
+		const Fixed _Y;
 };
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point);

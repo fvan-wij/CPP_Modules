@@ -2,28 +2,26 @@
 #include "Fixed.hpp"
 
 //Constructors
-Point::Point(){
-	_X = Fixed(0);
-	_Y = Fixed(0);
+Point::Point() : _X(0), _Y(0){
+
 }
 
-Point::Point(const float x, const float y){
-	_X = Fixed(x);
-	_Y = Fixed(y);
+Point::Point(const float x, const float y) : _X(x), _Y(y){
+
 }
 
 Point::Point(Point& other){
 	*this = other;
 }
 
-Point::Point( const Point &src ){
-	_X = src.getX();
-	_Y = src.getY();
+Point::Point(const Point &other) : _X(other.getX()), _Y(other.getY()){
+
 }
 
+//Operators
 Point& Point::operator= (const Point& other){
-	this->_X = other.getX();
-	this->_Y = other.getY();
+	const_cast<Fixed&>(this->_X) = other.getX();
+	const_cast<Fixed&>(this->_Y) = other.getY();
 	return (*this);
 }
 

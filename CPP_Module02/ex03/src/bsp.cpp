@@ -8,14 +8,27 @@ static Fixed calculateAreaOfTriangle(Point const p1, Point const p2, Point const
 }
 
 static Fixed	abs(Fixed value){
-	if (value < 0)
+	if (value < 0) {
 		return (value * -1);
-	else
-	 	return (value);
+	}
+	else {
+		return (value);
+	}
 }
 
-static bool isPointOnLine(Point const point, Point const l1, Point const l2){
-	return ((point.getY() - l1.getY()) * (l2.getX() - l1.getX()) == (point.getX() - l1.getX()) * (l2.getY() - l1.getY()));
+static bool isPointOnLine(Point const point, Point const p1, Point const p2){
+	const float dxPoint = (point.getX() - p1.getX());
+	const float dyPoint = (point.getY() - p1.getY());
+	const float dxLine  = (p2.getX() - p1.getX());
+	const float dyLine  = (p2.getY() - p1.getY());
+
+	float crossProduct = dxPoint * dyLine - dyPoint * dxLine;
+	if (crossProduct != 0) {
+		return (false);
+	}
+	else {
+		return (true);
+	}
 }
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point){
@@ -30,8 +43,11 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point){
 		Fixed area3 = abs(calculateAreaOfTriangle(c, a, point));
 		Fixed sumTriangles = (area1 + area2 + area3);
 		Fixed areaTriangle = abs(calculateAreaOfTriangle(a, b, c));
-		if (sumTriangles == areaTriangle)
+
+		if (sumTriangles == areaTriangle) {
 			return (true);
-		else
+		}
+		else {
 			return (false);
+		}
 };

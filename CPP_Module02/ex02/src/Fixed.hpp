@@ -27,10 +27,10 @@ class Fixed{
 		Fixed  operator-- (int);
 
 		//Arithmetic operators
-		float operator+ (const Fixed& other);
-		float operator- (const Fixed& other);
-		float operator* (const Fixed& other);
-		float operator/ (const Fixed& other);
+		Fixed operator+ (const Fixed& other);
+		Fixed operator- (const Fixed& other);
+		Fixed operator* (const Fixed& other);
+		Fixed operator/ (const Fixed& other);
 
 
 		//Destructor

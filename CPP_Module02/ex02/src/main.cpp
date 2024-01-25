@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <cmath>
 #include "Fixed.hpp"
@@ -65,11 +66,12 @@ int main(void)
 	std::cout << plus++ << std::endl;
 	std::cout << plus << std::endl;
 
-	//Testing arithmetic operator "+"
+
+	// //Testing arithmetic operator "+"
 	Fixed add(Fixed(5.05f) + Fixed(2));
 	std::cout << "add: " << add << std::endl;
 
-	//Testing arithmetic operator "-"
+	// //Testing arithmetic operator "-"
 	Fixed subtract(Fixed(5.05f) - Fixed(2));
 	std::cout << "subtract: " << subtract << std::endl;
 
@@ -77,14 +79,14 @@ int main(void)
 	Fixed mult(Fixed(5.05f) * Fixed(2));
 	std::cout << "mult: " << mult << std::endl;
 
-	//Testing arithmetic operator "/"
+	// //Testing arithmetic operator "/"
 	Fixed divide(Fixed(10.05f) / Fixed(2));
 	std::cout << "divide: " << divide << std::endl;
 
-	//Testing Min
+	// //Testing Min
 	std::cout << "Fixed::min(mult, divide): " << Fixed::min(mult, divide) << std::endl;
 
-	//Testing Min
+	// //Testing Min
 	std::cout << "Fixed::max(add, subtract): " << Fixed::max(add, subtract) << std::endl;
 
 	return (EXIT_SUCCESS);
