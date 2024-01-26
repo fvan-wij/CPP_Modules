@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Fixed.hpp"
+#include "ClapTrap.hpp"
 
 
 #define EXIT_SUCCESS 0
@@ -7,6 +7,12 @@
 
 int main(void)
 {
+	ClapTrap dude = ClapTrap("The Dude");
+
+	ClapTrap other = ClapTrap("The Other");
+
+	dude.attack("The Other");
+	other.takeDamage(0);
 
 	return (EXIT_SUCCESS);
 }
