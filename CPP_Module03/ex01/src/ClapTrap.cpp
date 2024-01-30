@@ -10,8 +10,20 @@ void	PrintDebugInfo(std::string col, std::string msg){
 	std::cout << col << msg << "\033[0m\t\t" << std::endl;
 }
 
+ClapTrap::ClapTrap(void) : _name("DEFAULT CLAPTRAP"), _hp(10), _ep(10), _ad(0) {
+	PrintDebugInfo(GREEN, "Default constructor called!");
+}
+
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
 	PrintDebugInfo(GREEN, "Default constructor called!");
+}
+
+ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
+	PrintDebugInfo(GREEN, "Default constructor called!");
+	_name 	= name;
+	_hp 	= hp;
+	_ep 	= ep;
+	_ad 	= ad;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hp(other._hp), _ep(other._ep), _ad(other._ad) {
@@ -19,18 +31,18 @@ ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hp(other._hp), 
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& other){
-	_name = other._name;
-	_hp = other._hp;
-	_ep = other._ep;
-	_ad = other._ad;
+	_name 	= other._name;
+	_hp 	= other._hp;
+	_ep 	= other._ep;
+	_ad 	= other._ad;
 	return (*this);
 }
 
 ClapTrap::~ClapTrap(void){
-	PrintDebugInfo(RED, "Deconstructor called!");
+	PrintDebugInfo(RED, "~Deconstructor called!");
 }
 
-std::string	ClapTrap::getName() const {
+std::string	ClapTrap::getName(void) const {
 	return (_name);
 }
 

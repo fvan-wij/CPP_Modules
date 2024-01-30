@@ -3,6 +3,7 @@ COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp 		\
 				ClapTrap.cpp 	\
+				ScavTrap.cpp	\
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj

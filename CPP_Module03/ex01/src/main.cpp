@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 
 #define EXIT_SUCCESS 0
@@ -23,6 +24,15 @@ int main(void)
 
 	duderadiator.beRepaired(2);
 	scrapneck.beRepaired(2);
+
+	ScavTrap scavneck = ScavTrap("Scavneck");
+	scavneck.attack("Scrapneck");
+	scrapneck.takeDamage(scavneck.getAd());
+	std::cout << "Scrapneck's HP: " << scrapneck.getHp() << std::endl;
+	std::cout << "Scavneck's EP: " << scavneck.getEp() << std::endl;
+
+	scavneck.guardGate();
+	scavneck.guardGate();
 
 	return (EXIT_SUCCESS);
 }
