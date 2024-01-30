@@ -2,20 +2,19 @@
 #include <string>
 #include <iostream>
 
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
-
-void	ScavTrap::PrintDebugInfo(std::string col, std::string msg){
-	std::cout << col << msg << "\033[0m\t\t" << std::endl;
+ScavTrap::ScavTrap(void) {
+	this->setName("DEFAULT SCAV");
+	this->setHp(100);
+	this->setEp(50);
+	this->setAd(20);
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20) {
-	PrintDebugInfo(GREEN, "Derived constructor called!");
+	this->PrintDebugInfo(GREEN, "Derived constructor called!");
 }
 
 ScavTrap::~ScavTrap(void) {
-	PrintDebugInfo(RED, "~Derived deconstructor called!");
+	this->PrintDebugInfo(RED, "~Derived deconstructor called!");
 }
 
 void ScavTrap::attack(std::string name){
