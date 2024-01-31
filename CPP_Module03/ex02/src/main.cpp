@@ -37,7 +37,6 @@ int main(void)
 
 	FragTrap fragneck = FragTrap("Fragneck");
 	fragneck.highFiveGuys();
-	fragneck.guardGate();
 	fragneck.attack("Scavneck");
 
 	return (EXIT_SUCCESS);

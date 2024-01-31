@@ -3,15 +3,15 @@
 #include <istream>
 
 ClapTrap::ClapTrap(void) : _name("DEFAULT CLAPTRAP"), _hp(10), _ep(10), _ad(0) {
-	this->PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
-	this->PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 }
 
 ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
-	this->PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 	_name 	= name;
 	_hp 	= hp;
 	_ep 	= ep;
@@ -19,7 +19,7 @@ ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned 
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hp(other._hp), _ep(other._ep), _ad(other._ad) {
-	this->PrintDebugInfo(GREEN, "Copy constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap copy constructor called!");
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& other){
@@ -31,7 +31,7 @@ ClapTrap& ClapTrap::operator= (const ClapTrap& other){
 }
 
 ClapTrap::~ClapTrap(void){
-	this->PrintDebugInfo(RED, "~Deconstructor called!");
+	ClapTrap::PrintDebugInfo(RED, "~ClapTrap deconstructor called!");
 }
 
 std::string	ClapTrap::getName(void) const {

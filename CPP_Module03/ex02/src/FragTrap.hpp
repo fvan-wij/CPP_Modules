@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
-class FragTrap : public ScavTrap {
+class FragTrap : public ClapTrap {
 	public:
 		FragTrap(std::string name);
 		~FragTrap(void);

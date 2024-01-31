@@ -30,7 +30,8 @@ class ClapTrap{
 		std::string	getName(void) const;
 
 		void 		PrintDebugInfo(std::string col, std::string msg);
-	private:
+
+	protected:
 		std::string _name;
 		int			_hp;
 		int			_ep;

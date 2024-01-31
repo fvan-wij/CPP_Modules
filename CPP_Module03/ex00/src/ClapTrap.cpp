@@ -2,36 +2,44 @@
 #include <iostream>
 #include <istream>
 
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
-
-void	PrintDebugInfo(std::string col, std::string msg){
-	std::cout << col << msg << "\033[0m\t\t" << std::endl;
+ClapTrap::ClapTrap(void) : _name("DEFAULT CLAPTRAP"), _hp(10), _ep(10), _ad(0) {
+	this->PrintDebugInfo(GREEN, "Default constructor called!");
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
-	PrintDebugInfo(GREEN, "Default constructor called!");
+	this->PrintDebugInfo(GREEN, "Default constructor called!");
+}
+
+ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
+	this->PrintDebugInfo(GREEN, "Default constructor called!");
+	_name 	= name;
+	_hp 	= hp;
+	_ep 	= ep;
+	_ad 	= ad;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hp(other._hp), _ep(other._ep), _ad(other._ad) {
-	PrintDebugInfo(GREEN, "Copy constructor called!");
+	this->PrintDebugInfo(GREEN, "Copy constructor called!");
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& other){
-	_name = other._name;
-	_hp = other._hp;
-	_ep = other._ep;
-	_ad = other._ad;
+	_name 	= other._name;
+	_hp 	= other._hp;
+	_ep 	= other._ep;
+	_ad 	= other._ad;
 	return (*this);
 }
 
 ClapTrap::~ClapTrap(void){
-	PrintDebugInfo(RED, "Deconstructor called!");
+	this->PrintDebugInfo(RED, "~Deconstructor called!");
 }
 
-std::string	ClapTrap::getName() const {
+std::string	ClapTrap::getName(void) const {
 	return (_name);
+}
+
+void	ClapTrap::setName(std::string name) {
+	_name = name;
 }
 
 void		ClapTrap::attack(const std::string& target) {
@@ -76,19 +84,31 @@ void		ClapTrap::beRepaired(unsigned int amount) {
 	}
 }
 
-int	ClapTrap::getAd(void) const {
-	return _ad;
-}
-
-void		ClapTrap::setAd(unsigned int amount) {
-	_ad = amount;
+int	ClapTrap::getHp(void) const {
+	return _hp;
 }
 
 int	ClapTrap::getEp(void) const {
 	return _ep;
 }
 
-int	ClapTrap::getHp(void) const {
-	return _hp;
+
+int	ClapTrap::getAd(void) const {
+	return _ad;
 }
 
+void		ClapTrap::setHp(unsigned int amount) {
+	_hp = amount;
+}
+
+void		ClapTrap::setEp(unsigned int amount) {
+	_ep = amount;
+}
+
+void		ClapTrap::setAd(unsigned int amount) {
+	_ad = amount;
+}
+
+void	ClapTrap::PrintDebugInfo(std::string col, std::string msg){
+	std::cout << col << msg << "\033[0m\t\t" << std::endl;
+}

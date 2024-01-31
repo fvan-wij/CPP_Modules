@@ -2,16 +2,20 @@
 #include <iostream>
 #include <string>
 
-FragTrap::FragTrap(std::string name) {
-	this->PrintDebugInfo(GREEN, "Derived-derived constructor called!");
-	this->setName(name);
-	this->setHp(100);
-	this->setEp(100);
-	this->setAd(30);
+FragTrap::FragTrap(void) {
+	FragTrap::PrintDebugInfo(GREEN, "FragTrap consructor called!");
+	ClapTrap::setName("Default Name");
+	ClapTrap::setHp(100);
+	ClapTrap::setEp(100);
+	ClapTrap::setAd(30);
+}
+
+FragTrap::FragTrap(std::string name) : ClapTrap(name, 100, 100, 30) {
+	ClapTrap::PrintDebugInfo(GREEN, "FragTrap constructor called!");
 }
 
 FragTrap::~FragTrap(void) {
-	this->PrintDebugInfo(RED, "~Derived-derived deconstructor called!");
+	ClapTrap::PrintDebugInfo(RED, "~FragTrap deconstructor called!");
 }
 
 void	FragTrap::highFiveGuys(void) {

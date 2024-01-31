@@ -36,6 +36,9 @@ It supports the concept of code reusability and reduces the length of the code.
 Polymorphism is the way in which we perform tasks in multiple forms or ways. It is applied to the functions or methods. 
 In essence, polymorphism is PART OF inheritance and cannot exist without it.
 
+## Virtual inheritance
 
+When there are multiple paths between a base and a derived class, (such as a diamond scheme), multiple base objects are being instantiated, which is usually not desirable.
+In this case, it's smart to choose for virtual inheritance, since you can avoid double instantiating of the base class.
 
 

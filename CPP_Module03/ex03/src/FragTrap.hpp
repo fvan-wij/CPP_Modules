@@ -1,13 +1,14 @@
 #pragma once
 
-#include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 
-class FragTrap : public ScavTrap {
+class FragTrap : virtual public ClapTrap {
 	public:
+		FragTrap(void);
 		FragTrap(std::string name);
 		~FragTrap(void);
 		void highFiveGuys(void);
 
-	private:
+	protected:
 
 };

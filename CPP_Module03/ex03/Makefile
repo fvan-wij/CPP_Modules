@@ -5,14 +5,15 @@ SRC			:=  main.cpp 		\
 				ClapTrap.cpp 	\
 				ScavTrap.cpp	\
 				FragTrap.cpp	\
+				DiamondTrap.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
 OBJ			:= 	$(addprefix $(OBJDIR)/,$(SRC:.cpp=.o))
 SRC			:= 	$(addprefix $(SRCDIR)/,$(SRC))
 
-ifdef LLDB
-	FLAGS += -g
+ifdef DEBUG
+	FLAGS += -g -fsanitize=address
 endif
 
 
