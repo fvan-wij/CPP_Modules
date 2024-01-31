@@ -3,9 +3,6 @@
 #include <cmath>
 #include "Fixed.hpp"
 
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
-
 int main(void)
 {
 	//Testing comparision operators "< and >"
@@ -89,5 +86,5 @@ int main(void)
 	// //Testing Min
 	std::cout << "Fixed::max(add, subtract): " << Fixed::max(add, subtract) << std::endl;
 
-	return (EXIT_SUCCESS);
+	return (0);
 }

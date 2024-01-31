@@ -2,29 +2,29 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed(){
+Fixed::Fixed() : _fpnVal(0) {
 	std::cout << "Default constructor called" << std::endl;
-	_fpnVal = 0;
 }
 
-Fixed::Fixed(const int integer){
+Fixed::Fixed(const int integer) : _fpnVal(integer<<_FRACTBITS) {
 	std::cout << "Integer constructor called" << std::endl;
-	_fpnVal = (integer<<_FRACTBITS);
 }
 
-Fixed::Fixed(const float floatingPointNumber){
+Fixed::Fixed(const float floatingPointNumber) {
 	std::cout << "Float constructor called" << std::endl;
-
 	float fpRepresentation = floatingPointNumber * (1<<_FRACTBITS);
 	this->setRawBits(roundf(fpRepresentation));
 }
 
-Fixed::Fixed(const Fixed& other){
-	*this = other;
+Fixed::Fixed(const Fixed& other) : _fpnVal(other._fpnVal) {
 	std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed& Fixed::operator= (const Fixed& other){
+Fixed& Fixed::operator= (const Fixed& other) {
+	std::cout << "Copy assignment operator called" << std::endl;
+	if (this == &other) {
+		return (*this);
+	}
 	this->_fpnVal = other.getRawBits();
 	return (*this);
 }
@@ -38,25 +38,25 @@ Fixed::~Fixed(){
 	std::cout << "Deconstructor called" << std::endl;
 }
 
-int	Fixed::getRawBits(void) const{
+int	Fixed::getRawBits(void) const {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (_fpnVal);
 }
 
-void	Fixed::setRawBits(int const raw){
+void	Fixed::setRawBits(int const raw) {
 	_fpnVal = raw;
 }
 
 float	Fixed::toFloat(void) const {
-	// Do ANDOR operation on _fpnVal, to figure out value of the first 8 bits, save in variable, transnlate to decimal == decimalPart;
-	float decimalPart = (_fpnVal & 255) / 256.0;
-	// Bitshift by 8 bits == integerPart
-	float integerPart = _fpnVal>>8;
-	// return integerPart + decimalPart;
+	float decimalPart;
+	float integerPart;
+
+	decimalPart	= (_fpnVal & 255) / 256.0;
+	integerPart = _fpnVal>>_FRACTBITS;
 	return (integerPart + decimalPart);
 }
 
-int		Fixed::toInt(void) const{
+int		Fixed::toInt(void) const {
 	return (_fpnVal>>8);
 }
 

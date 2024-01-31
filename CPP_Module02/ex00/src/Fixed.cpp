@@ -18,15 +18,15 @@ Fixed& Fixed::operator= (const Fixed& other) {
 	return (*this);
 }
 
-Fixed::~Fixed(){
+Fixed::~Fixed() {
 	std::cout << "Deconstructor called" << std::endl;
 }
 
-int	Fixed::getRawBits(void) const{
+int	Fixed::getRawBits() const {
 	std::cout << "getRawBits member function called" << std::endl;
 	return (_fpnVal);
 }
 
-void	Fixed::setRawBits(int const raw){
+void	Fixed::setRawBits(int const raw) {
 	_fpnVal = raw;
 }

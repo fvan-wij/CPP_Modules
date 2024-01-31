@@ -2,30 +2,30 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed(){
+Fixed::Fixed() : _fpnVal(0){
 	// std::cout << "Default constructor called" << std::endl;
-	_fpnVal = 0;
 }
 
-Fixed::Fixed(const int integer){
+Fixed::Fixed(const int integer) : _fpnVal(integer<<_FRACTBITS){
 	// std::cout << "Integer constructor called" << std::endl;
-	_fpnVal = (integer<<_FRACTBITS);
 }
 
-Fixed::Fixed(const float floatingPointNumber){
+Fixed::Fixed(const float floatingPointNumber) {
 	// std::cout << "Float constructor called" << std::endl;
 	float fpRepresentation;
-
 	fpRepresentation = floatingPointNumber * (1<<_FRACTBITS);
 	this->setRawBits(roundf(fpRepresentation));
 }
 
-Fixed::Fixed(const Fixed& other){
-	*this = other;
+Fixed::Fixed(const Fixed& other) : _fpnVal(other._fpnVal){
 	// std::cout << "Copy constructor called" << std::endl;
 }
 
 Fixed& Fixed::operator= (const Fixed& other){
+	// std::cout << "Copy assignment operator called" << std::endl;
+	if (this == &other) {
+		return (*this);
+	}
 	this->_fpnVal = other.getRawBits();
 	return (*this);
 }

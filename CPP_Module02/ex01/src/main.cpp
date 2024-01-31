@@ -2,9 +2,6 @@
 #include <cmath>
 #include "Fixed.hpp"
 
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
-
 int main(void)
 {
 	Fixed a;
@@ -24,6 +21,5 @@ int main(void)
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
-	
-	return (EXIT_SUCCESS);
+	return (0);
 }

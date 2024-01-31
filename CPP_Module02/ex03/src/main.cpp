@@ -2,9 +2,6 @@
 #include "Fixed.hpp"
 #include "Point.hpp"
 
-#define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
-
 int main(void)
 {
 	Point a(100.0, 100.0);
@@ -22,5 +19,5 @@ int main(void)
 	else {
 		std::cout << "No" << std::endl;
 	}
-	return (EXIT_SUCCESS);
+	return (0);
 }
