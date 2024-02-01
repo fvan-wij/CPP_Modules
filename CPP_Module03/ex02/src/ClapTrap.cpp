@@ -43,7 +43,10 @@ void	ClapTrap::setName(std::string name) {
 }
 
 void		ClapTrap::attack(const std::string& target) {
-	if (_ep > 0) {
+	if (_hp == 0) {
+		std::cout << "ClapTrap " << ClapTrap::getName() << " is destroyed and cannot do anything!" << std::endl;
+	}
+	else if (_ep > 0) {
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _ad << " points of damage!" << std::endl;
 		_ep--;
 	} 
@@ -77,7 +80,7 @@ void		ClapTrap::beRepaired(unsigned int amount) {
 	}
 	else if (_ep > 0) {
 		std::cout << "ClapTrap " << _name << " repairs itself with " << amount << " points!" << std::endl;
-		_ep-=amount;
+		_ep--;
 	} 
 	else {
 		std::cout << "ClapTrap " << _name << " has no energy left!" << std::endl;

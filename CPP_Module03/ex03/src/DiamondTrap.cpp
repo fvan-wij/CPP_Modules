@@ -19,5 +19,9 @@ void DiamondTrap::attack(const std::string& target) {
 }
 
 void DiamondTrap::whoAmI(void) {
-	std::cout << "*EXISTENTIAL NOISE* I am... " << _name << "! Which is derived from " << ClapTrap::getName() << std::endl;
+	if (DiamondTrap::getHp() > 0) {
+		std::cout << "*EXISTENTIAL NOISE* I am... " << _name << "! But my base model is " << ClapTrap::getName() << std::endl;
+	} else {
+		std::cout << DiamondTrap::getName() << " is dead and cannot do anything!" << std::endl;
+	}
 }

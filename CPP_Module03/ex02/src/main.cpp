@@ -39,5 +39,9 @@ int main(void)
 	fragneck.highFiveGuys();
 	fragneck.attack("Scavneck");
 
+
+	ScavTrap mysteriousneck = ScavTrap();
+	mysteriousneck.attack("his own shadow");
+
 	return (EXIT_SUCCESS);
 }

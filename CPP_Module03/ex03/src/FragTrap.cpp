@@ -19,5 +19,9 @@ FragTrap::~FragTrap(void) {
 }
 
 void	FragTrap::highFiveGuys(void) {
-	std::cout << "Give me a high five! *Holds robot hand in the air*" << std::endl;
+	if (FragTrap::getHp() != 0) {
+		std::cout << FragTrap::getName() <<": give me a high five! *Holds robot hand in the air*" << std::endl;
+	} else {
+		std::cout << FragTrap::getName() << " has no HP to do anything!" << std::endl;
+	}
 }

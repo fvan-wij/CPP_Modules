@@ -1,5 +1,9 @@
 #pragma once
 #include <string>
+#define RED "\x1B[31m"
+#define GREEN "\x1B[32m"
+#define YELLOW "\x1B[33m"
+
 
 class ClapTrap{
 	public:
@@ -10,19 +14,27 @@ class ClapTrap{
 		ClapTrap& operator=(const ClapTrap& other);
 		~ClapTrap(void);
 
-		std::string	getName(void) const;
 		void		attack(const std::string& target);
 		void		takeDamage(unsigned int amount);
 		void		beRepaired(unsigned int amount);
-		int			getAd(void) const;
-		int			getEp(void) const;
+
 		int			getHp(void) const;
+		int			getEp(void) const;
+		int			getAd(void) const;
+
+		void		setHp(unsigned int amount);
+		void		setEp(unsigned int amount);
 		void		setAd(unsigned int amount);
 
+		void		setName(std::string name);
+		std::string	getName(void) const;
+
+		void 		PrintDebugInfo(std::string col, std::string msg);
+
 	private:
-		std::string _name;
-		int			_hp;
-		int			_ep;
-		int			_ad;
+		std::string		_name;
+		unsigned int	_hp;
+		unsigned int	_ep;
+		unsigned int	_ad;
 };
 

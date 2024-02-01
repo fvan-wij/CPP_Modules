@@ -32,9 +32,9 @@ class ClapTrap{
 		void 		PrintDebugInfo(std::string col, std::string msg);
 
 	protected:
-		std::string _name;
-		int			_hp;
-		int			_ep;
-		int			_ad;
+		std::string		_name;
+		unsigned int	_hp;
+		unsigned int	_ep;
+		unsigned int	_ad;
 };
 

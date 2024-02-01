@@ -2,32 +2,44 @@
 #include <string>
 #include <iostream>
 
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
-
-void	ScavTrap::PrintDebugInfo(std::string col, std::string msg){
-	std::cout << col << msg << "\033[0m\t\t" << std::endl;
+ScavTrap::ScavTrap(void) {
+	ClapTrap::PrintDebugInfo(GREEN, "ScavTrap constructor called!");
+	ClapTrap::setName("DEFAULT SCAV");
+	ClapTrap::setHp(100);
+	ClapTrap::setEp(50);
+	ClapTrap::setAd(20);
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name, 100, 50, 20) {
-	PrintDebugInfo(GREEN, "Derived constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ScavTrap constructor called!");
 }
 
 ScavTrap::~ScavTrap(void) {
-	PrintDebugInfo(RED, "~Derived deconstructor called!");
+	ClapTrap::PrintDebugInfo(RED, "~ScavTrap constructor called!");
 }
 
-void ScavTrap::attack(std::string name){
-	std::cout << "ScavTrap: *TARGET ACQUIRED*, *SHOOTS LASER*," << " causing " << this->getAd() << " of damage to " << name << "!"<< std::endl;
+void ScavTrap::attack(std::string name) {
+	if (ClapTrap::getHp() == 0) {
+		std::cout << "ScavTrap " << ScavTrap::getName() << " is destroyed and cannot do anything!" << std::endl;
+	}
+	else if (ClapTrap::getEp() > 0 && ClapTrap::getHp() > 0) {
+		std::cout << "ScavTrap " << this->getName() << ": *TARGET ACQUIRED*, *SHOOTS LASER*," << " causing " << this->getAd() << " of damage to " << name << "!"<< std::endl;
+		ClapTrap::setEp(ClapTrap::getEp() - 1);
+	} 
+	else {
+		std::cout << "ScavTrap " << ScavTrap::getName() << " has no energy left!" << std::endl;
+	}
 }
 
 void ScavTrap::guardGate(void) {
 	_bIsGuard = !_bIsGuard;
-	if (_bIsGuard) {
-		std::cout << "ScavTrap " << this->getName() << " Gate keeper mode: ON" << std::endl;
+	if (ClapTrap::getHp() == 0) {
+		std::cout << "ScavTrap " << ScavTrap::getName() << " is destroyed and cannot do anything!" << std::endl;
+	}
+	else if (_bIsGuard) {
+		std::cout << "ScavTrap " << ScavTrap::getName() << " Gate keeper mode: ON" << std::endl;
 	}
 	else {
-		std::cout << "ScavTrap " << this->getName() << " Gate keeper mode: OFF" << std::endl;
+		std::cout << "ScavTrap " << ScavTrap::getName() << " Gate keeper mode: OFF" << std::endl;
 	}
 };

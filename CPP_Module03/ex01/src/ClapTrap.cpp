@@ -2,24 +2,16 @@
 #include <iostream>
 #include <istream>
 
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
-
-void	PrintDebugInfo(std::string col, std::string msg){
-	std::cout << col << msg << "\033[0m\t\t" << std::endl;
-}
-
 ClapTrap::ClapTrap(void) : _name("DEFAULT CLAPTRAP"), _hp(10), _ep(10), _ad(0) {
-	PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 }
 
 ClapTrap::ClapTrap(std::string name) : _name(name), _hp(10), _ep(10), _ad(0) {
-	PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 }
 
 ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned int ad) {
-	PrintDebugInfo(GREEN, "Default constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap constructor called!");
 	_name 	= name;
 	_hp 	= hp;
 	_ep 	= ep;
@@ -27,7 +19,7 @@ ClapTrap::ClapTrap(std::string name, unsigned int hp, unsigned int ep, unsigned 
 }
 
 ClapTrap::ClapTrap(const ClapTrap& other) : _name(other._name), _hp(other._hp), _ep(other._ep), _ad(other._ad) {
-	PrintDebugInfo(GREEN, "Copy constructor called!");
+	ClapTrap::PrintDebugInfo(GREEN, "ClapTrap copy constructor called!");
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& other){
@@ -39,15 +31,22 @@ ClapTrap& ClapTrap::operator= (const ClapTrap& other){
 }
 
 ClapTrap::~ClapTrap(void){
-	PrintDebugInfo(RED, "~Deconstructor called!");
+	ClapTrap::PrintDebugInfo(RED, "~ClapTrap deconstructor called!");
 }
 
 std::string	ClapTrap::getName(void) const {
 	return (_name);
 }
 
+void	ClapTrap::setName(std::string name) {
+	_name = name;
+}
+
 void		ClapTrap::attack(const std::string& target) {
-	if (_ep > 0) {
+	if (_hp == 0) {
+		std::cout << "ClapTrap " << ClapTrap::getName() << " is destroyed and cannot do anything!" << std::endl;
+	}
+	else if (_ep > 0) {
 		std::cout << "ClapTrap " << _name << " attacks " << target << ", causing " << _ad << " points of damage!" << std::endl;
 		_ep--;
 	} 
@@ -81,26 +80,38 @@ void		ClapTrap::beRepaired(unsigned int amount) {
 	}
 	else if (_ep > 0) {
 		std::cout << "ClapTrap " << _name << " repairs itself with " << amount << " points!" << std::endl;
-		_ep-=amount;
+		_ep--;
 	} 
 	else {
 		std::cout << "ClapTrap " << _name << " has no energy left!" << std::endl;
 	}
 }
 
-int	ClapTrap::getAd(void) const {
-	return _ad;
-}
-
-void		ClapTrap::setAd(unsigned int amount) {
-	_ad = amount;
+int	ClapTrap::getHp(void) const {
+	return _hp;
 }
 
 int	ClapTrap::getEp(void) const {
 	return _ep;
 }
 
-int	ClapTrap::getHp(void) const {
-	return _hp;
+
+int	ClapTrap::getAd(void) const {
+	return _ad;
 }
 
+void		ClapTrap::setHp(unsigned int amount) {
+	_hp = amount;
+}
+
+void		ClapTrap::setEp(unsigned int amount) {
+	_ep = amount;
+}
+
+void		ClapTrap::setAd(unsigned int amount) {
+	_ad = amount;
+}
+
+void	ClapTrap::PrintDebugInfo(std::string col, std::string msg){
+	std::cout << col << msg << "\033[0m\t\t" << std::endl;
+}

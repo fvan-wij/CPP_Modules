@@ -77,7 +77,7 @@ void		ClapTrap::beRepaired(unsigned int amount) {
 	}
 	else if (_ep > 0) {
 		std::cout << "ClapTrap " << _name << " repairs itself with " << amount << " points!" << std::endl;
-		_ep-=amount;
+		_ep--;
 	} 
 	else {
 		std::cout << "ClapTrap " << _name << " has no energy left!" << std::endl;
