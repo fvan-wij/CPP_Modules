@@ -1,5 +1,7 @@
 #pragma once
-#include <string>
+
+#include <iostream>
+
 #define RED "\x1B[31m"
 #define GREEN "\x1B[32m"
 #define YELLOW "\x1B[33m"
@@ -11,12 +13,12 @@ class Animal {
 		Animal(std::string type);
 		Animal(const Animal& other);
 		Animal& operator=(const Animal& other);
-		~Animal();
-		void			makeSound();
-		void 			PrintDebugInfo(std::string col, std::string msg);
-		std::string		getType() {return _type;};
-		void			setType(std::string type) {_type = type;};
+		virtual ~Animal();
+		virtual void			makeSound() const;
+		void 					PrintDebugInfo(std::string col, std::string msg);
+		std::string				getType() const {return _type;} ;
+		void					setType(std::string type) {_type = type;} ;
 
 	protected:
-		std::string		_type;
+		std::string				_type;
 };

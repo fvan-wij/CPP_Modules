@@ -1,33 +1,14 @@
-#include "Animal.hpp"
-#include <iostream>
-#include <istream>
+#include "Dog.hpp"
 
-Animal::Animal() : _type() {
-	Animal::PrintDebugInfo(GREEN, "Animal constructor called!");
+Dog::Dog() : Animal("Dog") {
+	Dog::PrintDebugInfo(GREEN, "Dog constructor called!");
 }
 
-Animal::Animal(std::string type) : _type(type) {
-	Animal::PrintDebugInfo(GREEN, "Animal constructor called!");
+Dog::~Dog(){
+	Dog::PrintDebugInfo(RED, "~Dog deconstructor called!");
 }
 
-Animal::Animal(const Animal& other) : _type(other._type) {
-	Animal::PrintDebugInfo(GREEN, "Animal copy constructor called!");
+void		Dog::makeSound() const {
+	std::cout << "DOOOOOOOOOOOOOOOOOGGGGGGGGGGGGGGGGGGGGGGGG" << std::endl;
 }
 
-Animal& Animal::operator= (const Animal& other){
-	Animal::PrintDebugInfo(YELLOW, "Animal copy assignment operator called!");
-	Animal::_type = other._type;	
-	return (*this);
-}
-
-Animal::~Animal(){
-	Animal::PrintDebugInfo(RED, "~Animal deconstructor called!");
-}
-
-void		Animal::makeSound() {
-	std::cout << "AAAAAAAAAAAAAAAAANIMAL" << std::endl;
-}
-
-void	Animal::PrintDebugInfo(std::string col, std::string msg){
-	std::cout << col << msg << "\033[0m\t\t" << std::endl;
-}

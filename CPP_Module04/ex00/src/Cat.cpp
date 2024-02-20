@@ -1,7 +1,13 @@
 #include "Cat.hpp"
-#include <iostream>
-#include <istream>
 
-void		Cat::makeSound() {
-	std::cout << "AAAAAAAAAAAAAAAAANIMAL" << std::endl;
+Cat::Cat() : Animal("Cat") {
+	Cat::PrintDebugInfo(GREEN, "Cat constructor called!");
+}
+
+Cat::~Cat() {
+	Cat::PrintDebugInfo(RED, "~Cat deconstructor called!");
+}
+
+void		Cat::makeSound() const {
+	std::cout << "CATTTTTTTTTTTTTTTTTTTTTTTT" << std::endl;
 }

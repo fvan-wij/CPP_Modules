@@ -2,7 +2,9 @@ NAME		:=	app
 COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp 		\
-				ClapTrap.cpp 	\
+				Animal.cpp		\
+				Cat.cpp			\
+				Dog.cpp			\
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj

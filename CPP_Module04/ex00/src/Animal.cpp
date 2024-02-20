@@ -1,6 +1,5 @@
 #include "Animal.hpp"
 #include <iostream>
-#include <istream>
 
 Animal::Animal() : _type() {
 	Animal::PrintDebugInfo(GREEN, "Animal constructor called!");
@@ -24,7 +23,7 @@ Animal::~Animal(){
 	Animal::PrintDebugInfo(RED, "~Animal deconstructor called!");
 }
 
-void		Animal::makeSound() {
+void		Animal::makeSound() const {
 	std::cout << "AAAAAAAAAAAAAAAAANIMAL" << std::endl;
 }
 

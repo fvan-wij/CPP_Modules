@@ -1,11 +1,9 @@
 #pragma once
-#include <string>
-#define RED "\x1B[31m"
-#define GREEN "\x1B[32m"
-#define YELLOW "\x1B[33m"
+#include "Animal.hpp"
 
-
-class Cat {
+class Cat : public Animal {
 	public:
-		void			makeSound();
+		Cat();
+		~Cat();
+		void			makeSound() const;
 };
