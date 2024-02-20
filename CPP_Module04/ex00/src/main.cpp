@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Animal.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -16,5 +18,8 @@ int main()
 	a2->makeSound();
 	meta->makeSound();
 
+	delete meta;
+	delete a1;
+	delete a2;
 	return (0);
 }

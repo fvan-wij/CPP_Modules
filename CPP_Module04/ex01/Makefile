@@ -7,6 +7,7 @@ SRC			:=  main.cpp 		\
 				Dog.cpp			\
 				WrongAnimal.cpp \
 				WrongCat.cpp	\
+				Brain.cpp		\
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
@@ -24,7 +25,7 @@ run: all
 
 $(NAME): $(OBJ)
 	@$(COMPILER) $^ -o $(NAME)
-	@echo $(Green) $(Bold) C++ ex00 compiled ✅ $(Text_Off)
+	@echo $(Green) $(Bold) C++ ex01 compiled ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	@mkdir -p $(@D) 
