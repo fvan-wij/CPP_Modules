@@ -15,11 +15,12 @@ class Animal {
 		Animal(const Animal& other);
 		Animal& operator=(const Animal& other);
 		virtual ~Animal();
+
 		virtual void			makeSound() const;
 		void 					PrintDebugInfo(std::string col, std::string msg);
 		std::string				getType() const {return _type;} ;
 		void					setType(std::string type) {_type = type;} ;
-		virtual Brain*					getBrain();
+		virtual Brain*			getBrain() = 0;
 
 	protected:
 		std::string				_type;

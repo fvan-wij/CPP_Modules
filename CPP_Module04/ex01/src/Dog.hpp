@@ -10,6 +10,7 @@ class Dog : public Animal {
 		Dog();
 		~Dog();
 		void			makeSound() const;
+		Brain*			getBrain() {return (_brain);};
 
 	private:
 		Brain* _brain;
