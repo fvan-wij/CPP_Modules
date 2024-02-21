@@ -16,8 +16,8 @@ class Brain {
 
 		void		PrintDebugInfo(std::string col, std::string msg);
 		void		setIdea(int index, std::string idea);
-		std::string	getIdea(int index) {return _ideas[index];};
+		std::string	getIdea(int index);
 
-	private:
+	protected:
 		std::string _ideas[100];
 };

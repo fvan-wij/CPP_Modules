@@ -22,6 +22,6 @@ class Animal {
 		void					setType(std::string type) {_type = type;} ;
 		virtual Brain*			getBrain() = 0;
 
-	protected:
+	private:
 		std::string				_type;
 };

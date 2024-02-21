@@ -36,7 +36,22 @@ void	Brain::PrintDebugInfo(std::string col, std::string msg) {
 }
 
 void		Brain::setIdea(int index, std::string idea) {
-	if (index >= 0 && index < 100) {
+	if (idea.length() == 0) {
+		std::cerr << "Error: setIdea argument 'idea' is empty" << std::endl;
+		return ;
+	} else if (index < 0 || index > MEMORY_CAP) {
+		std::cerr << "Error: setIdea argument 'index' must be a number between 0 and 100" << std::endl;
+		return ;
+	} else {
 		_ideas[index] = idea;
+	}
+}
+
+std::string	Brain::getIdea(int index) {
+	if (index < 0 || index > MEMORY_CAP) {
+		std::cerr << "Error: getIdea argument 'index' must be a number between 0 and 100" << std::endl;
+		return nullptr;
+	} else {
+		return (_ideas[index]);
 	}
 }
