@@ -30,3 +30,11 @@ void		Animal::makeSound() const {
 void	Animal::PrintDebugInfo(std::string col, std::string msg){
 	std::cout << col << msg << "\033[0m\t\t" << std::endl;
 }
+
+std::string	Animal::getType() const {
+	return (_type);
+}
+
+void	Animal::setType(std::string type) {
+	_type = type;
+}

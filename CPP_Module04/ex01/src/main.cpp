@@ -6,7 +6,6 @@
 
 int main()
 {
-
 	//Test using the animal base class pointing to a derived class
 	Animal* arr[4] = {new Cat(), new Cat(), new Dog(), new Dog()};
 
@@ -17,6 +16,8 @@ int main()
 	//My first intuition was to make the copy assignment operator virtual, so that the most derived version of the assignment operator would get called (from the Cat sub class). 
 	//This did not do the trick, perhaps the evaluator knows a better way?
 	*static_cast<Cat*>(arr[0]) = *static_cast<Cat*>(arr[1]);
+
+	*arr[0] = *arr[1];
 
 	arr[1]->getBrain()->setIdea(0, "I could eat a fish...");
 

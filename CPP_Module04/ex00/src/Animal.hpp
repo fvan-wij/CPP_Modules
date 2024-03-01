@@ -16,8 +16,8 @@ class Animal {
 		virtual ~Animal();
 		virtual void			makeSound() const;
 		void 					PrintDebugInfo(std::string col, std::string msg);
-		std::string				getType() const {return _type;} ;
-		void					setType(std::string type) {_type = type;} ;
+		std::string				getType() const;
+		void					setType(std::string type);
 
 	protected:
 		std::string				_type;

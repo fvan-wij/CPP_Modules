@@ -30,3 +30,12 @@ void		WrongAnimal::makeSound() const {
 void	WrongAnimal::PrintDebugInfo(std::string col, std::string msg){
 	std::cout << col << msg << "\033[0m\t\t" << std::endl;
 }
+
+std::string	WrongAnimal::getType() const {
+	return (_type);
+}
+
+void	WrongAnimal::setType(std::string type) {
+	_type = type;
+}
+
