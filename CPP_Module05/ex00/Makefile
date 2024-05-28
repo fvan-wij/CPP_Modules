@@ -2,20 +2,16 @@ NAME		:=	app
 COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp 		\
-				Animal.cpp		\
-				Cat.cpp			\
-				Dog.cpp			\
-				Brain.cpp		\
+				Bureaucrat.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
 OBJ			:= 	$(addprefix $(OBJDIR)/,$(SRC:.cpp=.o))
 SRC			:= 	$(addprefix $(SRCDIR)/,$(SRC))
 
-ifdef LLDB
+ifdef DEBUG
 	FLAGS += -g
 endif
-
 
 all: $(NAME)
 
