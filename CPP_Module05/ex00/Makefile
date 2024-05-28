@@ -1,6 +1,6 @@
 NAME		:=	app
 COMPILER	:=	c++
-FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
+FLAGS		:= 	-Wall -Wextra -Werror -std=c++11 -fpie
 SRC			:=  main.cpp 		\
 				Bureaucrat.cpp \
 

@@ -3,12 +3,11 @@
 
 int main()
 {
-	Bureaucrat dflt;
+	// Bureaucrat dflt;
 	Bureaucrat	*bob;
 
-	bob = new Bureaucrat("Bob", 155);
 	// try {
-	// 	bob->setGrade(155);
+	// 	bob = new Bureaucrat("Bob", 155);
 	// }
 	// catch (const Bureaucrat::GradeTooLowException& e) {
 	// 	std::cerr << "Exception caught: " << e.what() << std::endl;
@@ -17,7 +16,30 @@ int main()
 	// 	std::cerr << "Exception caught: " << e.what() << std::endl;
 	// }
 
-	dflt = *bob;
+	try {
+		bob = new Bureaucrat("Bob", 100);
+		bob->getGrade();
+		// bob->setGrade(150);
+	}
+	catch (const Bureaucrat::GradeTooLowException& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+	catch (const Bureaucrat::GradeTooHighException& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+
+	try {
+		bob->setGrade(150);
+	}
+	catch (const Bureaucrat::GradeTooLowException& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+	catch (const Bureaucrat::GradeTooHighException& e) {
+		std::cerr << "Exception caught: " << e.what() << std::endl;
+	}
+	bob->decrementGrade();
+
+	// dflt = *bob;
 	// try {
 	// 	bob->setGrade(155);
 	// }

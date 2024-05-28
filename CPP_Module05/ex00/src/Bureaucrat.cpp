@@ -10,6 +10,10 @@ Bureaucrat::Bureaucrat() : _NAME("Default"), _grade(150)
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _NAME(name), _grade(grade)
 {
+	if (grade > MIN_GRADE)
+		throw (GradeTooLowException());
+	else if (grade < MAX_GRADE)
+		throw (GradeTooHighException());
 	std::cout 	<< "A new Bureaucrat has been hired. Name: "
 		<< _NAME 
 		<< ", grade: " 
@@ -19,6 +23,10 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _NAME(name), _grade(
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _NAME(other._NAME), _grade(other._grade)
 {
+	if (other._grade > MIN_GRADE)
+		throw (GradeTooHighException());
+	else if (other._grade > MAX_GRADE)
+		throw (GradeTooLowException());
 	std::cout 	<< "A doppelganger has been hired. Name: "
 		<< _NAME 
 		<< ", grade: " 
@@ -68,6 +76,29 @@ void Bureaucrat::getGrade() const
 		<< "'s grade is " 
 		<< _grade 
 		<< std::endl;
+}
+
+void Bureaucrat::getName() const
+{
+	std::cout 	<< "Bureaucrat's name is: "
+		<< _NAME 
+		<< std::endl;
+}
+
+void Bureaucrat::incrementGrade()
+{
+	std::cout 	<< "Incrementing grade to " 
+		<< (this->_grade - 1) 
+		<< std::endl;
+	this->setGrade(this->_grade--);
+}
+
+void Bureaucrat::decrementGrade()
+{
+	std::cout 	<< "Decrementing grade to " 
+		<< (this->_grade + 1) 
+		<< std::endl;
+	this->setGrade(this->_grade++);
 }
 
 Bureaucrat::~Bureaucrat()
