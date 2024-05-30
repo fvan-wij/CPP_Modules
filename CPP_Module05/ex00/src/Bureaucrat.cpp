@@ -2,6 +2,7 @@
 
 Bureaucrat::Bureaucrat() : _NAME("Default"), _grade(150)
 {
+	std::cout << "(Default constructor) ";
 	std::cout 	<< "Default Bureaucrat has been hired. "
 		<< "Grade: " 
 		<< _grade 
@@ -10,6 +11,7 @@ Bureaucrat::Bureaucrat() : _NAME("Default"), _grade(150)
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _NAME(name), _grade(grade)
 {
+	std::cout << "(Constructor) ";
 	if (grade > MIN_GRADE)
 		throw (GradeTooLowException());
 	else if (grade < MAX_GRADE)
@@ -23,6 +25,7 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _NAME(name), _grade(
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other) : _NAME(other._NAME), _grade(other._grade)
 {
+	std::cout << "(Copy constructor) ";
 	if (other._grade > MIN_GRADE)
 		throw (GradeTooHighException());
 	else if (other._grade > MAX_GRADE)
@@ -36,6 +39,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat& other) : _NAME(other._NAME), _grade(oth
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
+	std::cout << "(Assignment operator) ";
 	std::cout 	<< "Assigning " 
 		<< other._NAME 
 		<< "'s grade to " 
@@ -66,6 +70,7 @@ void Bureaucrat::setGrade(int grade)
 			<< " to " 
 			<< grade 
 			<< std::endl;
+			this->_grade = grade;
 	};
 }
 
@@ -87,18 +92,14 @@ void Bureaucrat::getName() const
 
 void Bureaucrat::incrementGrade()
 {
-	std::cout 	<< "Incrementing grade to " 
-		<< (this->_grade - 1) 
-		<< std::endl;
-	this->setGrade(this->_grade--);
+	std::cout 	<< "(Incrementing..) ";
+	this->setGrade(_grade - 1);
 }
 
 void Bureaucrat::decrementGrade()
 {
-	std::cout 	<< "Decrementing grade to " 
-		<< (this->_grade + 1) 
-		<< std::endl;
-	this->setGrade(this->_grade++);
+	std::cout 	<< "(Decrementing..) ";
+	this->setGrade(_grade + 1);
 }
 
 Bureaucrat::~Bureaucrat()
