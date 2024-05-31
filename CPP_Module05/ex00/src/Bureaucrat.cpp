@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include <iostream>
 
 Bureaucrat::Bureaucrat() : _NAME("Default"), _grade(150)
 {
@@ -74,20 +75,22 @@ void Bureaucrat::setGrade(int grade)
 	};
 }
 
-void Bureaucrat::getGrade() const
+int Bureaucrat::getGrade() const
 {
-	std::cout 	<< "Bureaucrat "
-		<< _NAME 
-		<< "'s grade is " 
-		<< _grade 
-		<< std::endl;
+	// std::cout 	<< "Bureaucrat "
+	// 	<< _NAME 
+	// 	<< "'s grade is " 
+	// 	<< _grade 
+	// 	<< std::endl;
+	return (_grade);
 }
 
-void Bureaucrat::getName() const
+std::string Bureaucrat::getName() const
 {
-	std::cout 	<< "Bureaucrat's name is: "
-		<< _NAME 
-		<< std::endl;
+	// std::cout 	<< "Bureaucrat's name is: "
+	// 	<< _NAME 
+	// 	<< std::endl;
+	return (_NAME);
 }
 
 void Bureaucrat::incrementGrade()
@@ -110,7 +113,6 @@ Bureaucrat::~Bureaucrat()
 		<< std::endl;
 }
 
-
 const char* Bureaucrat::GradeTooLowException::what() const throw() 
 {
 	return ("Computer says NO: Grade is too low");
@@ -119,4 +121,10 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 const char* Bureaucrat::GradeTooHighException::what() const throw() 
 {
 	return ("Computer says NO: Grade is too high");
+}
+
+
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b)
+{
+	return (os << b.getName() << ", bureaucrat grade " << b.getGrade());
 }

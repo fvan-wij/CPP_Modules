@@ -40,6 +40,7 @@ int main()
 	Bureaucrat dflt;
 	try {
 		bob = new Bureaucrat("Bob", 150);
+		std::cout << dflt << std::endl;
 		dflt = *bob;
 		dflt.getGrade();
 		dflt.setGrade(149);
@@ -52,10 +53,12 @@ int main()
 	}
 	catch (const Bureaucrat::GradeTooLowException& e) {
 		std::cerr << "Exception caught: " << e.what() << std::endl;
+		delete bob;
 		return (1);
 	}
 	catch (const Bureaucrat::GradeTooHighException& e) {
 		std::cerr << "Exception caught: " << e.what() << std::endl;
+		delete bob;
 		return (1);
 	}
 	return (0);

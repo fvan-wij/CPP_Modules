@@ -14,8 +14,8 @@ public:
 	Bureaucrat &operator=(const Bureaucrat &other);
 	~Bureaucrat();
 
-	void				getName() const;
-	void				getGrade() const;
+	std::string			getName() const;
+	int					getGrade() const;
 	void				setGrade(int grade);
 	void				incrementGrade();
 	void				decrementGrade();
@@ -36,3 +36,4 @@ private:
 	 int				_grade;
 };
 
+std::ostream& operator<<(std::ostream& os, const Bureaucrat& b);
