@@ -1,83 +1,87 @@
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-void testSignTooLow()
+void	testShrubberyForm()
 {
-	Bureaucrat	bc("Bob", 150);
-	Form		form("Important form", 50, 50);
+	
+	{	//Successful
+		ShrubberyCreationForm	shrubForm("Tree");
+		Bureaucrat				bc("The President", 1);
 
-	bc.signForm(form);
-}
-
-void testSignSuccesful()
-{
-	Bureaucrat bc("Bob", 30);
-	Form form("Not-so-important-form", 30, 150);
-	bc.signForm(form);
-}
-
-void testConstructorTooLowSignGrade()
-{
-	try
-	{
-		Form form("Form", 151, 40);
+		bc.signForm(shrubForm);
+		bc.executeForm(shrubForm);
 	}
-	catch (std::exception& exception)
-	{
-		std::cerr << "An exception was caught! " << exception.what() << std::endl;
-	}
+	{	//Not signed
+		ShrubberyCreationForm	shrubForm("Struikje");
+		Bureaucrat				bc("Noob", 150);
 
-	try
-	{
-		Form form("Form", 20, 151);
+		bc.executeForm(shrubForm);
 	}
-	catch (std::exception& exception)
-	{
-		std::cerr << "An exception was caught! " << exception.what() << std::endl;
+	{	//Low grade
+		ShrubberyCreationForm	shrubForm("Boompje");
+		Bureaucrat				bc("Bob", 144);
+
+		bc.signForm(shrubForm);
+		bc.executeForm(shrubForm);
 	}
 }
 
-void testConstructorTooHighSignGrade()
+void	testRobotomyForm()
 {
-	try
-	{
-		Form form("Form", 0, 40);
-	}
-	catch (std::exception& exception)
-	{
-		std::cerr << "An exception was caught! " << exception.what() << std::endl;
-	}
+	{	//Succesful
+		RobotomyRequestForm		robotForm("Subject 617");
+		Bureaucrat				bc("Krüger", 1);
 
-	try
-	{
-		Form form("Form", 20, 0);
+		bc.signForm(robotForm);
+		bc.executeForm(robotForm);
 	}
-	catch (std::exception& exception)
-	{
-		std::cerr << "An exception was caught! " << exception.what() << std::endl;
+	{	//Not signed
+		RobotomyRequestForm		robotForm("Subject 617");
+		Bureaucrat				bc("Krüger", 1);
+
+		bc.executeForm(robotForm);
+	}
+	{	//Low grade
+		RobotomyRequestForm		robotForm("Subject 617");
+		Bureaucrat				bc("Krüger", 70);
+
+		bc.signForm(robotForm);
+		bc.executeForm(robotForm);
 	}
 }
 
-void testConstructors(void)
+void	testPresidentialForm()
 {
-	Bureaucrat bob("Bob", 100);
-	Form boring("Not-so-important-form", 150, 150);
-	Form exciting("Very-important-form", 1, 1);
-	std::cout << boring << std::endl;
-	std::cout << exciting << std::endl;
-	Form copyform(exciting);
-	boring.beSigned(bob);
-	copyform = boring;
-	std::cout << copyform << std::endl;
+	{	//Succesful
+		PresidentialPardonForm		presForm("Excus've'nt");
+		Bureaucrat					bc("The dude", 1);
+
+		bc.signForm(presForm);
+		bc.executeForm(presForm);
+	}
+	{	//Not signed
+		PresidentialPardonForm		presForm("Excus've'nt");
+		Bureaucrat					bc("The dude", 1);
+
+		bc.executeForm(presForm);
+	}
+	{	//Low grade
+		PresidentialPardonForm		presForm("Excus've'nt");
+		Bureaucrat					bc("The dude", 20);
+
+		bc.signForm(presForm);
+		bc.executeForm(presForm);
+	}
 }
 
 int main()
 {
-	testConstructors();
-	// testSignTooLow();
-	// testSignSuccesful();
-	// testConstructorTooLowSignGrade();
-	// testConstructorTooHighSignGrade();
+	// testShrubberyForm();
+	// testRobotomyForm();
+	testPresidentialForm();
 	return (0);
 }

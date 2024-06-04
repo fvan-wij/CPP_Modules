@@ -3,7 +3,10 @@ COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11 
 SRC			:=  main.cpp 		\
 				Bureaucrat.cpp \
-				Form.cpp \
+				AForm.cpp \
+				ShrubberyCreationForm.cpp \
+				RobotomyRequestForm.cpp \
+				PresidentialPardonForm.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
