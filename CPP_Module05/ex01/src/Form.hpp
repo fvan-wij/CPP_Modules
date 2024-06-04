@@ -1,15 +1,15 @@
 #pragma once
-#include <exception>
 #include <string>
-#include <iostream>
 
 #define MIN_GRADE 150
 #define MAX_GRADE 1
 
+class Bureaucrat;
+
 class Form {
 public:
 	Form();
-	Form(const std::string name, int grade);
+	Form(const std::string name, int signGrade, int execGrade);
 	Form(const Form &other);
 	Form &operator=(const Form &other);
 	~Form();
@@ -17,9 +17,9 @@ public:
 	std::string			getName() const;
 	int					getSignGrade() const;
 	int					getExecGrade() const;
-	// void				setGrade(int grade);
-	// void				incrementGrade();
-	// void				decrementGrade();
+	bool				isSigned() const;
+	void				beSigned(Bureaucrat& bc);
+	void				logDebug(std::string col, std::string msg);
 
 	class GradeTooHighException : public std::exception
 	{
