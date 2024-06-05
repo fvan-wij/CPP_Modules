@@ -20,6 +20,10 @@ ifdef DEBUG
 	FLAGS += -g
 endif
 
+ifdef LEAKS
+	FLAGS += -g -fsanitize=address
+endif
+
 all: $(NAME)
 
 run: all

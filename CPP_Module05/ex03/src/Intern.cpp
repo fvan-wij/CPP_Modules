@@ -26,7 +26,7 @@ Intern::~Intern()
 	logDebug(RED, "~(Deconstructor) It's 5 pm! Time for the intern to go home!");
 }
 
-AForm	*makeForm(std::string name, std::string target)
+AForm*	Intern::makeForm(std::string name, std::string target)
 {
 	const std::string 	forms[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
 	uint8_t 			formId;
@@ -51,7 +51,7 @@ AForm	*makeForm(std::string name, std::string target)
 
 const char* Intern::FormDoesNotExistException::what() const throw()
 {
-	return ("Form does not exist");
+	return ("\x1B[33mForm does not exist\n\033[0m");
 }
 
 void	Intern::logDebug(std::string col, std::string msg)

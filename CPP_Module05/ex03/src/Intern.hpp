@@ -13,7 +13,7 @@ class Intern
 		Intern& operator=(const Intern& other);
 		~Intern();
 
-		AForm	*makeForm(std::string name, std::string target);
+		AForm*	makeForm(std::string name, std::string target);
 		void	logDebug(std::string col, std::string msg);
 		class FormDoesNotExistException : public std::exception
 		{
