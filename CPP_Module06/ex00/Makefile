@@ -2,6 +2,7 @@ NAME		:=	app
 COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11 
 SRC			:=  main.cpp 		\
+				ScalarConverter.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
