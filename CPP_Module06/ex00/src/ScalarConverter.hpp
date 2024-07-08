@@ -8,8 +8,8 @@ typedef enum scalarType {
 	ERROR
 } scalarType;
 
-static bool stris(const std::string str, int (*f)(int));
-static bool isfloat(const std::string str);
+bool stris(const std::string str, int (*f)(int));
+bool isfloat(const std::string str);
 
 class ScalarConverter {
 	private:
