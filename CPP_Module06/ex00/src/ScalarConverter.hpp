@@ -1,22 +1,18 @@
 #include <iostream>
 
-typedef enum scalarType {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	ERROR
-} scalarType;
-
-bool stris(const std::string str, int (*f)(int));
-bool isfloat(const std::string str);
+bool	stris(const std::string& str, int (*f)(int));
+bool	isfloat(const std::string& str);
+bool 	isdouble(const std::string& str);
+void	convertChar(const std::string &str);
+void	convertInt(const std::string &str);
+void	convertFloat(const std::string &str);
+void	convertDouble(const std::string &str);
 
 class ScalarConverter {
 	private:
 		ScalarConverter();
 		~ScalarConverter();
-		static scalarType getScalarType(const std::string scalarStr);
 
 	public:
-		static int convert(const std::string scalarStr);
+		static int convert(const std::string str);
 };
