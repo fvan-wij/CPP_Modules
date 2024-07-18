@@ -11,50 +11,49 @@ bool stris(const std::string& str, int (*f)(int)) {
 	return true;
 }
 
-bool isfloat(const std::string& str) {
+bool isfloat(std::string str) {
 	std::string before;
 	std::string after;
 	size_t		dot;
 	size_t		start;
 
 	dot = str.find('.');
+	if (str.find('f') == str.length() - 1)
+		str.pop_back();
 	start = 0;
 	if (str[0] == '.' && str[1] == 'f')
 		return false;
-	if (dot != str.npos && str[(char)str.find('f')] == str[str.length() - 1]) {
-		if (str[0] == '-' || str[0] == '+') {
-			start = 1;
-		}
-		before = str.substr(start, dot - start);
-		after = str.substr(dot + 1, str.rfind('f'));
-		after.pop_back();
-		if (stris(before, std::isdigit) && stris(after, std::isdigit)) {
-			return true;
-		}
+	if (str[0] == '-' || str[0] == '+') {
+		start = 1;
 	}
+		before = str.substr(start, dot - start);
+		after = str.substr(dot + 1, str.length());
+		if ((stris(before, std::isdigit) && after.length() == 0) 
+			|| (stris(before, std::isdigit) && stris(after, std::isdigit)))
+			return true;
 	return false;
 }
 
-bool isdouble(const std::string& str) {
+bool isdouble(std::string str) {
 	std::string before;
 	std::string after;
 	size_t		dot;
 	size_t		start;
 
 	dot = str.find('.');
+	if (str.find('f') == str.length() - 1)
+		str.pop_back();
 	start = 0;
-	if (dot != str.npos) {
-		if (str[0] == '-' || str[0] == '+') {
-			start = 1;
-		}
-		before = str.substr(start, dot - start);
-		after = str.substr(dot + 1, (dot + 1) + str.length());
-		if (after.find('f') != str.npos)
-			after.pop_back();
-		if (stris(before, std::isdigit) && stris(after, std::isdigit)) {
-			return true;
-		}
+	if (str[0] == '.' && str[1] == 'f')
+		return false;
+	if (str[0] == '-' || str[0] == '+') {
+		start = 1;
 	}
+		before = str.substr(start, dot - start);
+		after = str.substr(dot + 1, str.length());
+		if ((stris(before, std::isdigit) && after.length() == 0) 
+			|| (stris(before, std::isdigit) && stris(after, std::isdigit)))
+			return true;
 	return false;
 }
 
@@ -98,7 +97,13 @@ void	convertFloat(const std::string &str) {
 		std::cout << str << std::endl;
 	}
 	else if (isfloat(str)) {
-		std::cout << std::stof(str) << 'f' << std::endl;
+		float f = std::stof(str);
+		if (static_cast<int>(f) - f == 0) {
+			std::cout << f << ".0f" << std::endl;
+		}
+		else {
+			std::cout << f << 'f' << std::endl;
+		}
 	} else {
 		std::cout << "Impossible" << std::endl;
 	}
@@ -110,7 +115,12 @@ void	convertDouble(const std::string &str) {
 	} else if (str == "nan" || str == "+inf" || str == "-inf" || str == "inf") {
 		std::cout << str << std::endl;
 	}  else if (isdouble(str)) {
-		std::cout << std::stod(str) << std::endl;
+		double d = std::stod(str);
+		if (static_cast<int>(d) - d == 0) {
+			std::cout << d << ".0" << std::endl;
+		} else {
+			std::cout << d << std::endl;
+		}
 	} else {
 		std::cout << "Impossible" << std::endl;
 	}

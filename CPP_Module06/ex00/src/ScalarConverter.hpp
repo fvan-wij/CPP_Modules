@@ -1,8 +1,8 @@
 #include <iostream>
 
 bool	stris(const std::string& str, int (*f)(int));
-bool	isfloat(const std::string& str);
-bool 	isdouble(const std::string& str);
+bool	isfloat(std::string str);
+bool 	isdouble(std::string str);
 void	convertChar(const std::string &str);
 void	convertInt(const std::string &str);
 void	convertFloat(const std::string &str);
