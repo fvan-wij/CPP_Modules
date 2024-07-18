@@ -2,6 +2,7 @@
 #include <string>
 #include <sstream>
 #include <cctype>
+#include <exception>
 
 bool stris(const std::string& str, int (*f)(int)) {
 	for	(const char& c : str) {
@@ -62,16 +63,28 @@ void	convertChar(const std::string &str) {
 		std::cout << "Impossible" << std::endl;
 	} else if (stris(str, std::isdigit)) {
 		char c = std::stoi(str);
-		std::cout << c << std::endl;
+		if (std::stoi(str) < 0 || std::stoi(str) > 127)
+			std::cout << "Impossible" << std::endl;
+		else if (std::isprint(c))
+			std::cout << c << std::endl;
 	} else if (isfloat(str)) {
 		char c = std::stof(str);
-		std::cout << c << std::endl;
+		if (std::stof(str) < 0 || std::stof(str) > 127)
+			std::cout << "Impossible" << std::endl;
+		else if (std::isprint(c))
+			std::cout << c << std::endl;
+		else
+			std::cout << "Non-printable" << std::endl;
 	} else if (isdouble(str)) {
 		char c = std::stod(str);
-		std::cout << c << std::endl;
-	} else {
+		if (std::stod(str) < 0 || std::stod(str) > 127)
+			std::cout << "Impossible" << std::endl;
+		else if (std::isprint(c))
+			std::cout << c << std::endl;
+		else
+			std::cout << "Non-printable" << std::endl;
+	} else
 		std::cout << "Impossible" << std::endl;
-	}
 }
 
 void	convertInt(const std::string &str) {
@@ -127,6 +140,21 @@ void	convertDouble(const std::string &str) {
 }
 
 int ScalarConverter::convert(const std::string str) {
+	// std::string temp;
+	//
+	// try {
+	// 	temp = str;
+	// 	if (temp.rfind('f') != temp.npos) { 
+	// 		temp.pop_back();
+	// 		std::stof(temp);
+	// 	}
+	// 	else if (stris(temp, std::isdigit)) {
+	// 		std::stoi(temp);
+	// 	}
+	// } catch (const std::exception& e) {
+	// 	std::cerr << "ERRORRRRR" << std::endl;
+	// 	return 1;
+	// }
 	std::cout << "Char: ";
 	convertChar(str);
 	std::cout << "Int: ";
