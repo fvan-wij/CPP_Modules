@@ -3,6 +3,7 @@ COMPILER	:=	c++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++11 
 SRC			:=  main.cpp 		\
 				ScalarConverter.cpp \
+				identifiers.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj

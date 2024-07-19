@@ -1,168 +1,76 @@
 #include "ScalarConverter.hpp"
-#include <string>
-#include <sstream>
-#include <cctype>
-#include <exception>
+#include <regex>
 
-bool stris(const std::string& str, int (*f)(int)) {
-	for	(const char& c : str) {
-		if (!f(c))
-			return false;
-	}
-	return true;
-}
+dataID	getDataType(std::string &str) 
+{
+	int start = 0;
 
-bool isfloat(std::string str) {
-	std::string before;
-	std::string after;
-	size_t		dot;
-	size_t		start;
-
-	dot = str.find('.');
-	if (str.find('f') == str.length() - 1)
-		str.pop_back();
-	start = 0;
-	if (str[0] == '.' && str[1] == 'f')
-		return false;
-	if (str[0] == '-' || str[0] == '+') {
+	if (str[0] == '+' || str[0] == '-')
 		start = 1;
+	if (str.length() == 1 && std::isdigit(str[0]) && std::isprint(str[0]))
+		return CHAR;
+	else if (str == "nanf" || str == "+inff" || str == "-inff" || str == "inff" 
+			|| str == "nan" || str == "+inf" || str == "-inf" || str == "inf")
+		return SCI;
+	else if (stris(str.substr(start, str.length()), std::isdigit) )
+		return INT;
+	else if (std::regex_match(str, std::regex("[-+]?[0-9]+.[0-9]+f")))
+	{
+		if (str.find('f') == str.length() - 1)
+			str.pop_back();
+		return FLOAT;
 	}
-		before = str.substr(start, dot - start);
-		after = str.substr(dot + 1, str.length());
-		if ((stris(before, std::isdigit) && after.length() == 0) 
-			|| (stris(before, std::isdigit) && stris(after, std::isdigit)))
-			return true;
-	return false;
+	else if (std::regex_match(str, std::regex("[-+]?[0-9]+.[0-9]+")))
+		return DOUBLE;
+	return INVALID;
 }
 
-bool isdouble(std::string str) {
-	std::string before;
-	std::string after;
-	size_t		dot;
-	size_t		start;
+int ScalarConverter::convert(std::string str) 
+{
+	char	character_conversion;
+	int		integer_conversion;
+	float	float_conversion;
+	double	double_conversion;
 
-	dot = str.find('.');
-	if (str.find('f') == str.length() - 1)
-		str.pop_back();
-	start = 0;
-	if (str[0] == '.' && str[1] == 'f')
-		return false;
-	if (str[0] == '-' || str[0] == '+') {
-		start = 1;
+	switch (getDataType(str))
+	{
+		case CHAR:
+			character_conversion = convertChar(str);
+			integer_conversion = static_cast<int>(character_conversion);
+			float_conversion = static_cast<float>(character_conversion);
+			double_conversion = static_cast<double>(character_conversion);
+			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
+			return 0;
+		case INT:
+			integer_conversion = convertInt(str);
+			character_conversion = static_cast<char>(integer_conversion);
+			float_conversion = static_cast<float>(integer_conversion);
+			double_conversion = static_cast<double>(integer_conversion);
+			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
+			return 0;
+		case FLOAT:
+			float_conversion = convertFloat(str);
+			character_conversion = static_cast<char>(float_conversion);
+			integer_conversion = static_cast<int>(float_conversion);
+			double_conversion = static_cast<double>(float_conversion);
+			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
+			return 0;
+		case DOUBLE:
+			double_conversion = convertDouble(str);
+			character_conversion = static_cast<char>(double_conversion);
+			integer_conversion = static_cast<int>(double_conversion);
+			float_conversion = static_cast<float>(double_conversion);
+			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
+			return 0;
+		case SCI:
+			double_conversion = static_cast<double>(std::stod(str));
+			float_conversion = static_cast<float>(std::stof(str));
+			printOutput(float_conversion, double_conversion);
+			return 0;
+		case INVALID:
+			std::cout << "Invalid input! Make sure your input is a convertible string" << std::endl;
+			return 1;
 	}
-		before = str.substr(start, dot - start);
-		after = str.substr(dot + 1, str.length());
-		if ((stris(before, std::isdigit) && after.length() == 0) 
-			|| (stris(before, std::isdigit) && stris(after, std::isdigit)))
-			return true;
-	return false;
-}
-
-void	convertChar(const std::string &str) {
-	if (str.empty()) {
-		std::cout << "Impossible" << std::endl;
-	} else if (stris(str, std::isdigit)) {
-		char c = std::stoi(str);
-		if (std::stoi(str) < 0 || std::stoi(str) > 127)
-			std::cout << "Impossible" << std::endl;
-		else if (std::isprint(c))
-			std::cout << c << std::endl;
-	} else if (isfloat(str)) {
-		char c = std::stof(str);
-		if (std::stof(str) < 0 || std::stof(str) > 127)
-			std::cout << "Impossible" << std::endl;
-		else if (std::isprint(c))
-			std::cout << c << std::endl;
-		else
-			std::cout << "Non-printable" << std::endl;
-	} else if (isdouble(str)) {
-		char c = std::stod(str);
-		if (std::stod(str) < 0 || std::stod(str) > 127)
-			std::cout << "Impossible" << std::endl;
-		else if (std::isprint(c))
-			std::cout << c << std::endl;
-		else
-			std::cout << "Non-printable" << std::endl;
-	} else
-		std::cout << "Impossible" << std::endl;
-}
-
-void	convertInt(const std::string &str) {
-	if (str.empty()) {
-		std::cout << "Impossible" << std::endl;
-	} else if (stris(str, std::isdigit)) {
-		std::cout << std::stoi(str) << std::endl;
-	} else if (isfloat(str)) {
-		int i = std::stof(str);
-		std::cout << i << std::endl;
-	} else if (isdouble(str)) {
-		int i = std::stof(str);
-		std::cout << i << std::endl;
-	} else {
-		std::cout << "Impossible" << std::endl;
-	}
-}
-
-void	convertFloat(const std::string &str) {
-	if (str.empty()) {
-		std::cout << "Impossible" << std::endl;
-	} else if (str == "nanf" || str == "+inff" || str == "-inff" || str == "inff") {
-		std::cout << str << std::endl;
-	}
-	else if (isfloat(str)) {
-		float f = std::stof(str);
-		if (static_cast<int>(f) - f == 0) {
-			std::cout << f << ".0f" << std::endl;
-		}
-		else {
-			std::cout << f << 'f' << std::endl;
-		}
-	} else {
-		std::cout << "Impossible" << std::endl;
-	}
-}
-
-void	convertDouble(const std::string &str) {
-	if (str.empty()) {
-		std::cout << "Impossible" << std::endl;
-	} else if (str == "nan" || str == "+inf" || str == "-inf" || str == "inf") {
-		std::cout << str << std::endl;
-	}  else if (isdouble(str)) {
-		double d = std::stod(str);
-		if (static_cast<int>(d) - d == 0) {
-			std::cout << d << ".0" << std::endl;
-		} else {
-			std::cout << d << std::endl;
-		}
-	} else {
-		std::cout << "Impossible" << std::endl;
-	}
-}
-
-int ScalarConverter::convert(const std::string str) {
-	// std::string temp;
-	//
-	// try {
-	// 	temp = str;
-	// 	if (temp.rfind('f') != temp.npos) { 
-	// 		temp.pop_back();
-	// 		std::stof(temp);
-	// 	}
-	// 	else if (stris(temp, std::isdigit)) {
-	// 		std::stoi(temp);
-	// 	}
-	// } catch (const std::exception& e) {
-	// 	std::cerr << "ERRORRRRR" << std::endl;
-	// 	return 1;
-	// }
-	std::cout << "Char: ";
-	convertChar(str);
-	std::cout << "Int: ";
-	convertInt(str);
-	std::cout << "Float: ";
-	convertFloat(str);
-	std::cout << "Double: ";
-	convertDouble(str);
 	return 0;
 };
 
@@ -173,4 +81,3 @@ ScalarConverter::ScalarConverter() {
 ScalarConverter::~ScalarConverter() {
 
 };
-

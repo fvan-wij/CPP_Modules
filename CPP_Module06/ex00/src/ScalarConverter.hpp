@@ -1,12 +1,30 @@
 #include <iostream>
 
+typedef enum dataID
+{
+	CHAR,
+	INT,
+	FLOAT,
+	DOUBLE,
+	SCI,
+	INVALID
+} dataID;
+
 bool	stris(const std::string& str, int (*f)(int));
-bool	isfloat(std::string str);
-bool 	isdouble(std::string str);
-void	convertChar(const std::string &str);
-void	convertInt(const std::string &str);
-void	convertFloat(const std::string &str);
-void	convertDouble(const std::string &str);
+bool	isdecimal(std::string str);
+char	convertChar(const std::string &str);
+int		convertInt(const std::string &str);
+float	convertFloat(const std::string &str);
+double	convertDouble(const std::string &str);
+void 	printOutput(char c, int i, float f, double d);
+void 	printOutput(float f, double d);
+void 	printSciOutput(const std::string &str);
+dataID	getDataType(std::string &str);
+
+void printChar(char c);
+void printInt(int i);
+void printFloat(float f);
+void printDouble(double d);
 
 class ScalarConverter {
 	private:
@@ -14,5 +32,5 @@ class ScalarConverter {
 		~ScalarConverter();
 
 	public:
-		static int convert(const std::string str);
+		static int convert(std::string str);
 };
