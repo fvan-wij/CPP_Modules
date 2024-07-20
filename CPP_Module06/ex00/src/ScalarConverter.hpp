@@ -10,27 +10,31 @@ typedef enum dataID
 	INVALID
 } dataID;
 
+//		identifiers.cpp
 bool	stris(const std::string& str, int (*f)(int));
 bool	isdecimal(std::string str);
+
+//		convert.cpp
 char	convertChar(const std::string &str);
-int		convertInt(const std::string &str);
+int		convertInt(const std::string &str, int *err);
 float	convertFloat(const std::string &str);
 double	convertDouble(const std::string &str);
-void 	printOutput(char c, int i, float f, double d);
-void 	printOutput(float f, double d);
-void 	printSciOutput(const std::string &str);
-dataID	getDataType(std::string &str);
 
-void printChar(char c);
-void printInt(int i);
-void printFloat(float f);
-void printDouble(double d);
+//		print.cpp
+int 	printOutput(char c, int i, float f, double d, int err);
+int 	printOutput(float f, double d, int err);
+void 	printSciOutput(const std::string &str);
+void 	printChar(char c);
+void 	printInt(int i);
+void 	printFloat(float f);
+void 	printDouble(double d);
 
 class ScalarConverter {
 	private:
 		ScalarConverter();
-		~ScalarConverter();
+		virtual ~ScalarConverter() = 0;
+		static dataID	getDataType(std::string &str);
 
 	public:
-		static int convert(std::string str);
+		static int 		convert(std::string str);
 };

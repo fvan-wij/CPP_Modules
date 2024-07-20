@@ -4,6 +4,8 @@ FLAGS		:= 	-Wall -Wextra -Werror -std=c++11
 SRC			:=  main.cpp 		\
 				ScalarConverter.cpp \
 				identifiers.cpp \
+				convert.cpp \
+				print.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj

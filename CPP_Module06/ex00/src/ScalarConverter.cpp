@@ -1,7 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <regex>
 
-dataID	getDataType(std::string &str) 
+dataID	ScalarConverter::getDataType(std::string &str) 
 {
 	int start = 0;
 
@@ -27,46 +27,42 @@ dataID	getDataType(std::string &str)
 
 int ScalarConverter::convert(std::string str) 
 {
-	char	character_conversion;
-	int		integer_conversion;
-	float	float_conversion;
-	double	double_conversion;
+	char	c;
+	int		i;
+	float	f;
+	double	d;
+	int		err;
 
 	switch (getDataType(str))
 	{
 		case CHAR:
-			character_conversion = convertChar(str);
-			integer_conversion = static_cast<int>(character_conversion);
-			float_conversion = static_cast<float>(character_conversion);
-			double_conversion = static_cast<double>(character_conversion);
-			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
-			return 0;
+			c = convertChar(str);
+			i = static_cast<int>(c);
+			f = static_cast<float>(c);
+			d = static_cast<double>(c);
+			return printOutput(c, i, f, d, err);
 		case INT:
-			integer_conversion = convertInt(str);
-			character_conversion = static_cast<char>(integer_conversion);
-			float_conversion = static_cast<float>(integer_conversion);
-			double_conversion = static_cast<double>(integer_conversion);
-			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
-			return 0;
+			i = convertInt(str, &err);
+			c = static_cast<char>(i);
+			f = static_cast<float>(i);
+			d = static_cast<double>(i);
+			return printOutput(c, i, f, d, err);
 		case FLOAT:
-			float_conversion = convertFloat(str);
-			character_conversion = static_cast<char>(float_conversion);
-			integer_conversion = static_cast<int>(float_conversion);
-			double_conversion = static_cast<double>(float_conversion);
-			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
-			return 0;
+			f = convertFloat(str);
+			c = static_cast<char>(f);
+			i = static_cast<int>(f);
+			d = static_cast<double>(f);
+			return printOutput(c, i, f, d, err);
 		case DOUBLE:
-			double_conversion = convertDouble(str);
-			character_conversion = static_cast<char>(double_conversion);
-			integer_conversion = static_cast<int>(double_conversion);
-			float_conversion = static_cast<float>(double_conversion);
-			printOutput(character_conversion, integer_conversion, float_conversion, double_conversion);
-			return 0;
+			d = convertDouble(str);
+			c = static_cast<char>(d);
+			i = static_cast<int>(d);
+			f = static_cast<float>(d);
+			return printOutput(c, i, f, d, err);
 		case SCI:
-			double_conversion = static_cast<double>(std::stod(str));
-			float_conversion = static_cast<float>(std::stof(str));
-			printOutput(float_conversion, double_conversion);
-			return 0;
+			f = static_cast<float>(std::stof(str));
+			d = static_cast<double>(std::stod(str));
+			return printOutput(f, d, err);
 		case INVALID:
 			std::cout << "Invalid input! Make sure your input is a convertible string" << std::endl;
 			return 1;
