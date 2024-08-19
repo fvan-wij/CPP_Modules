@@ -5,41 +5,43 @@ template <typename T>
 class Array 
 {
 	private:
-		unsigned int	m_Size;
-		T 				*arr;
+		unsigned int	_size;
+		T 				*_arr;
 
 	public:
 		Array();
 		Array(unsigned int n);
 		Array(Array& other);
 		Array& operator=(const Array& obj);
-		int size() const;
+		T &operator[](unsigned int index);
+
+		unsigned int size() const;
 		~Array();
 };
 
 //Template code
 
 template <typename T>
-Array<T>::Array() : m_Size(0), arr(nullptr)
+Array<T>::Array() : _size(0), _arr(nullptr)
 {
 	std::cout << "Created Array template" << std::endl;
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n) : m_Size(n)
+Array<T>::Array(unsigned int n) : _size(n)
 {
-	arr = new T[n];
+	_arr = new T[n];
 
-	std::fill(arr, arr + n, T());
+	std::fill(_arr, _arr + n, T());
 
 	std::cout << "Created Array template of size " << n << std::endl;
 }
 
 template <typename T>
-Array<T>::Array(Array& other) : m_Size(other.m_Size), arr(new T[other.size()]) 
+Array<T>::Array(Array& other) : _size(other._size), _arr(new T[other.size()]) 
 {
-	for (size_t i = 0; i < m_Size; i++)
-		arr[i] = other.arr[i];
+	for (size_t i = 0; i < _size; i++)
+		_arr[i] = other._arr[i];
 	std::cout << "Copy constructor called" << std::endl;
 }
 
@@ -51,26 +53,44 @@ Array<T>& Array<T>::operator=(const Array& obj)
 		std::cout << "Copy assignment operator called" << std::endl;
 		return *this;
 	}
-	else if (arr)
-		delete [] arr;
+	else if (_arr)
+		delete [] _arr;
 
-	arr = new T[obj.size()];
-	m_Size = obj.size();
-	for (size_t i = 0; i < m_Size; i++)
-		arr[i] = obj.arr[i];
+	_arr = new T[obj.size()];
+	_size = obj.size();
+	for (size_t i = 0; i < _size; i++)
+		_arr[i] = obj._arr[i];
 	std::cout << "Copy assignment operator called" << std::endl;
 	return *this;
 }
 
 template <typename T>
+T &Array<T>::operator[](unsigned int index)
+{
+	if (index < _size)
+		return _arr[index];
+	throw std::out_of_range("Index out of bounds");
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, Array<T> &obj)
+{
+	for (size_t i = 0; i < obj.size(); i++)
+	{
+		os << "[" << obj[i] << "] ";
+	}
+	return (os);
+}
+
+template <typename T>
 Array<T>::~Array()
 {
-	delete [] arr;
+	delete [] _arr;
 	std::cout << "~Destroyed Array template" << std::endl;
 }
 
 template <typename T>
-int Array<T>::size() const
+unsigned int Array<T>::size() const
 {
-	return m_Size;
+	return _size;
 }
