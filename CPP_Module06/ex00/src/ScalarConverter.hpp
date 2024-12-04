@@ -1,14 +1,14 @@
 #include <iostream>
 
-typedef enum dataID
+typedef enum class dataId
 {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	SCI,
-	INVALID
-} dataID;
+	Char,
+	Int,
+	Float,
+	Double,
+	Sci,
+	Invalid
+} dataId;
 
 //		identifiers.cpp
 bool	stris(const std::string& str, int (*f)(int));
@@ -33,7 +33,7 @@ class ScalarConverter {
 	private:
 		ScalarConverter();
 		virtual ~ScalarConverter() = 0;
-		static dataID	getDataType(std::string &str);
+		static dataId	getDataId(std::string &str);
 
 	public:
 		static int 		convert(std::string str);

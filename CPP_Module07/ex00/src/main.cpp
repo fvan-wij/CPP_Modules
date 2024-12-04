@@ -43,5 +43,6 @@ int main()
 	testMax();
 	testMin();
 	testSwap();
+	// testDifferentArgumentType();
 	return 0;
 }

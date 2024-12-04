@@ -25,7 +25,5 @@ Array<T>::Array(unsigned int n) : arr_size(n)
 		std::cout << arr[i] << std::endl;
 	}
 
-	// std::fill(arr, arr + n, T());
-
 	std::cout << "Created Array template of size " << n << std::endl;
 }
