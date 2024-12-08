@@ -1,7 +1,8 @@
-NAME		:=	app
+NAME		:=	btc
 COMPILER	:=	c++
-FLAGS		:= 	-Wall -Wextra -Werror -std=c++11 
+FLAGS		:= 	-Wall -Wextra -Werror -std=c++17 
 SRC			:=  main.cpp 		\
+				BitcoinExchange.cpp \
 
 SRCDIR 		:= 	./src
 OBJDIR 		:= 	./obj
