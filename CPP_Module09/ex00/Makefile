@@ -1,6 +1,6 @@
 NAME		:=	btc
-COMPILER	:=	c++
-FLAGS		:= 	-Wall -Wextra -Werror -std=c++17 
+COMPILER	:=	g++
+FLAGS		:= 	-Wall -Wextra -Werror -std=c++20 
 SRC			:=  main.cpp 		\
 				BitcoinExchange.cpp \
 
