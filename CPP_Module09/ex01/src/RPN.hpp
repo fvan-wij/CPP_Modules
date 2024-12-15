@@ -9,6 +9,8 @@ class	RPN
 	public:
 		RPN();
 		RPN(const std::string&	input);
+		RPN(const RPN& rhs);
+		RPN& operator=(const RPN& rhs);
 		~RPN();
 
 		int	getResult();

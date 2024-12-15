@@ -36,6 +36,23 @@ RPN::RPN(const std::string&	input) : _result(0)
 	}
 }
 
+RPN::RPN(const RPN& rhs)
+{
+	_rpnStack = rhs._rpnStack;
+	_result = rhs._result;
+}
+
+RPN& RPN::operator=(const RPN& rhs)
+{
+	if (this == &rhs)
+		return *this;
+
+	_rpnStack = rhs._rpnStack;
+	_result = rhs._result;
+
+	return *this;
+}
+
 RPN::~RPN()
 {
 
