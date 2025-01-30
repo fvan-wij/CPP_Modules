@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+#include "PmergeMe.hpp"
+
 int main(int argc, char *argv[])
 {
 	if (argc <= 1)
@@ -29,4 +31,6 @@ int main(int argc, char *argv[])
 	{
 		std::cout << elem << std::endl;
 	}
+	PmergeMe sorter;
+	sorter.sort(intVec);
 }

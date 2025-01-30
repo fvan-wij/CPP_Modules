@@ -5,12 +5,12 @@
 class PmergeMe
 {
 	public:
-		PmergeMe(const std::vector<int>& intVec);
+		PmergeMe();
 		~PmergeMe();
 
-		std::vector<int>	sort(std::vector<int>	elements);
+		std::vector<int>	sort(std::vector<int>&	elements);
 
 	private:
-		std::vector<int>						_intVec;
-		std::size_t								_leftover;
+		// std::vector<int>						_intVec;
+		// std::size_t								_leftover;
 };

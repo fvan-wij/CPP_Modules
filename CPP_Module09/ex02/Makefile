@@ -2,6 +2,7 @@ NAME		:=	PmergeMe
 COMPILER	:=	g++
 FLAGS		:= 	-Wall -Wextra -Werror -std=c++20 
 SRC			:=  main.cpp 		\
+				PmergeMe.cpp	\
 
 
 SRCDIR 		:= 	./src
