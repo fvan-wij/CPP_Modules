@@ -3,6 +3,16 @@
 
 #include "PmergeMe.hpp"
 
+
+static void	printNumbers(std::vector<int>& vec)
+{
+	for (int n : vec)
+	{
+		std::cout << n << ", ";
+	}
+	std::cout << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
 	if (argc <= 1)
@@ -27,10 +37,7 @@ int main(int argc, char *argv[])
 		i++;
 	}
 
-	for (const auto& elem : intVec)
-	{
-		std::cout << elem << std::endl;
-	}
 	PmergeMe sorter;
-	sorter.sort(intVec);
+	sorter.mergeSort(intVec, 0, intVec.size() - 1);
+	printNumbers(intVec);
 }

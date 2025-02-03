@@ -13,10 +13,6 @@ SRC			:= 	$(addprefix $(SRCDIR)/,$(SRC))
 EXERCISE	:= $(shell basename $(PWD))
 
 ifdef DEBUG
-	FLAGS += -g
-endif
-
-ifdef LEAKS
 	FLAGS += -g -fsanitize=address
 endif
 

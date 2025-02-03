@@ -35,6 +35,57 @@ std::vector<int>	PmergeMe::sort(std::vector<int>&	elements)
 	return elements;
 }
 
+void	PmergeMe::merge(std::vector<int>& elements, size_t low, size_t mid, size_t high)
+{
+	std::vector<int>	subarrayL(elements.begin() + low, elements.begin() + mid + 1);
+	std::vector<int>	subarrayR(elements.begin() + mid + 1, elements.begin() + high + 1);
+
+	std::cout << "low: " << low << ", mid: " << mid << ", high: " << high << std::endl;
+
+	size_t iL = 0;
+	size_t iR = 0;
+	size_t	i = low;
+
+	while (iL < subarrayL.size() && iR < subarrayR.size())
+	{
+		if (subarrayL[iL] <= subarrayR[iR])
+		{
+			elements[i] = subarrayL[iL];
+			iL++;
+		}
+		else
+		{
+			elements[i] = subarrayR[iR];
+			iR++;
+		}
+		i++;
+	}
+	while (iL < subarrayL.size())
+	{
+		elements[i] = subarrayL[iL];
+		iL++;
+		i++;
+	}
+	while (iR < subarrayR.size())
+	{
+		elements[i] = subarrayR[iR];
+		iR++;
+		i++;
+	}
+}
+
+void	PmergeMe::mergeSort(std::vector<int>&	elements, size_t low, size_t high)
+{
+	if (low >= high)
+		return;
+
+	size_t	mid = (low + high) / 2;
+
+	mergeSort(elements, low, mid);
+	mergeSort(elements, mid + 1, high);
+	merge(elements, low, mid, high);
+}
+
 PmergeMe::~PmergeMe()
 {
 
