@@ -37,7 +37,11 @@ int main(int argc, char *argv[])
 		i++;
 	}
 
-	PmergeMe sorter;
-	sorter.mergeSort(intVec, 0, intVec.size() - 1);
+	PmergeMe::mergeInsertionSort(intVec);
+	// PmergeMe::mergeSort(intVec, 0, intVec.size() - 1);
 	printNumbers(intVec);
+	// std::cout << "Jacobsthal n is: " << PmergeMe::calculateJacobsthal(intVec[0]) << std::endl;
+	// int n = 100;
+	// std::cout << "Index of " <<  n << " is: " << PmergeMe::binarySearch(intVec, n) << std::endl;
+	// std::cout << PmergeMe::binarySearch(intVec, n) << std::endl;
 }
