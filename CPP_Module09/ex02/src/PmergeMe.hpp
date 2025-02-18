@@ -23,7 +23,7 @@ class PmergeMe
 
 		static void mergeInsertionSort(std::vector<int>& elements);
 		static size_t calculateJacobsthal(size_t n);
-		static int	binarySearch(std::vector<int>& intVec, int n);
+		static int	binaryInsertion(std::vector<int>& intVec, int n);
 
 	private:
 };

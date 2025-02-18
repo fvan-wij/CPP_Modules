@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <iostream>
 #include <algorithm>
+#include <chrono>
 
 std::vector<int>	PmergeMe::sort(std::vector<int>&	elements)
 {
@@ -137,12 +138,16 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 {
 	int oddOne = -1;
 
+    std::chrono::high_resolution_clock::time_point start_timer = std::chrono::high_resolution_clock::now();
 	// Group into n/2 pairs
 	if (elements.size() % 2 == 1)
 	{
 		oddOne = elements.back();
 		elements.pop_back();
 	}
+
+	if (oddOne != -1)
+		std::cout << "oddOne: " << oddOne << std::endl;
 	size_t nPairs = elements.size() / 2;
 	std::vector<std::pair<int, int>> pairs;
 	pairs.reserve(nPairs);
@@ -167,8 +172,6 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 	{
 		std::cout << "[" << a << ", " << b << "]" << std::endl;
 	}
-	if (oddOne != -1)
-		std::cout << "oddOne: " << oddOne << std::endl;
 
 
 	// Create main and pend chain
@@ -198,7 +201,27 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 
 	// Insert pend into main
 
+	main.insert(main.begin(), pend[0]);
+	pend.erase(pend.begin());
+
+	for (auto & elem : pend)
+	{
+		auto it = std::lower_bound(main.begin(), main.end(), elem);
+		main.insert(it, elem);
+		// main.insert(main.begin() + binaryInsertion(main, elem), elem);
+	}
+	if (oddOne != -1)
+	{
+		auto it = std::lower_bound(main.begin(), main.end(), oddOne);
+		main.insert(it, oddOne);
+		// main.insert(main.begin() + binaryInsertion(main, oddOne), oddOne);
+	}
+	elements = main;
+    std::chrono::high_resolution_clock::time_point end_timer = std::chrono::high_resolution_clock::now();
+    auto deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end_timer - start_timer).count();
+	std::cout << deltaTime << std::endl;
 }
+
 
 size_t PmergeMe::calculateJacobsthal(size_t n)
 {
@@ -207,31 +230,31 @@ size_t PmergeMe::calculateJacobsthal(size_t n)
 	return calculateJacobsthal(n - 1) + (2 * calculateJacobsthal(n - 2));
 }
 
-int	PmergeMe::binarySearch(std::vector<int>& intVec, int n)
+int	PmergeMe::binaryInsertion(std::vector<int>& intVec, int n)
 {
 	int l = 0;
 	int r = intVec.size() - 1;
+	int m = 0;
 
 	while (l <= r)
 	{
-		int m  = (l + r) / 2;
+		m = (l + r) / 2;
 		if (intVec[m] == n)
 		{
-			return m;
+			return m + 1;
 		}
 		if (n < intVec[m])
 		{
-			std::cout << n << " < " << intVec[m] << std::endl;
-			std::cout << "r = " << m  << std::endl;
+			// std::cout << n << " < " << intVec[m] << std::endl;
+			// std::cout << "r = " << m  << std::endl;
 			r = m - 1;
 		}
 		else if (n > intVec[m])
 		{
-			std::cout << n << " > " << intVec[m] << std::endl;
-			std::cout << "l = " << m  << std::endl;
+			// std::cout << n << " > " << intVec[m] << std::endl;
+			// std::cout << "l = " << m  << std::endl;
 			l = m + 1;
 		}
 	}
-	return (-1);
+	return (l);
 }
-
