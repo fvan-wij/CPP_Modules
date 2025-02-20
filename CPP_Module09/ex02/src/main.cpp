@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 	}
 
 	std::vector<int> intVec;
+	std::deque<int> intDeque;
 	size_t i = 1;
 	while (argv[i])
 	{
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
 		{
 			int	number = std::stoi(argv[i]);
 			intVec.push_back(number);
+			intDeque.push_back(number);
 		}
 		catch (std::exception& e)
 		{
@@ -29,9 +31,5 @@ int main(int argc, char *argv[])
 		i++;
 	}
 	PmergeMe::mergeInsertionSort(intVec);
-	// auto it = std::lower_bound(intVec.begin(), intVec.end(), 0);
-	// intVec.insert(it, 0);
-	// std::cout <<  *it << std::endl;
-	// printNumbers(intVec);
-
+	PmergeMe::mergeInsertionSort(intDeque);
 }
