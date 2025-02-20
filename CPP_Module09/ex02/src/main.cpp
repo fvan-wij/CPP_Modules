@@ -4,14 +4,6 @@
 #include "PmergeMe.hpp"
 
 
-static void	printNumbers(std::vector<int>& vec)
-{
-	for (int n : vec)
-	{
-		std::cout << n << ", ";
-	}
-	std::cout << std::endl;
-}
 
 int main(int argc, char *argv[])
 {
@@ -40,6 +32,6 @@ int main(int argc, char *argv[])
 	// auto it = std::lower_bound(intVec.begin(), intVec.end(), 0);
 	// intVec.insert(it, 0);
 	// std::cout <<  *it << std::endl;
-	printNumbers(intVec);
+	// printNumbers(intVec);
 
 }

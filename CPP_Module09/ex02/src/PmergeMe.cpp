@@ -4,6 +4,19 @@
 #include <algorithm>
 #include <chrono>
 
+#define printvariable(x) std::cout << (#x) << ": [";
+
+static void	printVector(std::vector<int>& vec)
+{
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		std::cout << vec[i];
+		if ((i + 1) < vec.size())
+			std::cout << ", ";
+	}
+	std::cout << "]" << std::endl;
+}
+
 std::vector<int>	PmergeMe::sort(std::vector<int>&	elements)
 {
 	std::vector<std::pair<int, int>>	pairs;
@@ -76,7 +89,7 @@ void	PmergeMe::merge(std::vector<std::pair<int, int>>& pairs, size_t low, size_t
 	std::vector<std::pair<int, int>>	subarrayL(pairs.begin() + low, pairs.begin() + mid + 1);
 	std::vector<std::pair<int, int>>	subarrayR(pairs.begin() + mid + 1, pairs.begin() + high + 1);
 
-	std::cout << "low: " << low << ", mid: " << mid << ", high: " << high << std::endl;
+	// std::cout << "low: " << low << ", mid: " << mid << ", high: " << high << std::endl;
 
 	size_t iL = 0;
 	size_t iR = 0;
@@ -146,8 +159,8 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 		elements.pop_back();
 	}
 
-	if (oddOne != -1)
-		std::cout << "oddOne: " << oddOne << std::endl;
+	// if (oddOne != -1)
+	// 	std::cout << "oddOne: " << oddOne << std::endl;
 	size_t nPairs = elements.size() / 2;
 	std::vector<std::pair<int, int>> pairs;
 	pairs.reserve(nPairs);
@@ -162,16 +175,7 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 	}
 
 	// Recursively sort pairs based on the first number
-	for (const auto& [a, b] : pairs)
-	{
-		std::cout << "[" << a << ", " << b << "]" << std::endl;
-	}
-	std::cout << "mergeSort..." << std::endl;
 	mergeSort(pairs, 0, pairs.size() - 1);
-	for (const auto& [a, b] : pairs)
-	{
-		std::cout << "[" << a << ", " << b << "]" << std::endl;
-	}
 
 
 	// Create main and pend chain
@@ -183,43 +187,63 @@ void PmergeMe::mergeInsertionSort(std::vector<int>& elements)
 		main.push_back(a);
 		pend.push_back(b);
 	}
-	std::cout << "main: [";
-	for (size_t i = 0; i < main.size(); i++)
-	{
-		std::cout << main[i];
-		if ((i + 1) < main.size())
-			std::cout << ", ";
-	}
-	std::cout << "]\npend: [";
-	for (size_t i = 0; i < pend.size(); i++)
-	{
-		std::cout << pend[i];
-		if ((i + 1) < pend.size())
-			std::cout << ", ";
-	}
-	std::cout << "]" << std::endl;
+	printvariable(main);
+	printVector(main);
+
+	printvariable(pend);
+	printVector(pend);
+
 
 	// Insert pend into main
 
 	main.insert(main.begin(), pend[0]);
 	pend.erase(pend.begin());
 
-	for (auto & elem : pend)
+	std::vector<int> jacobsthalVec;
+	for (size_t i = 0; i < main.size(); i++)
 	{
-		auto it = std::lower_bound(main.begin(), main.end(), elem);
-		main.insert(it, elem);
-		// main.insert(main.begin() + binaryInsertion(main, elem), elem);
+		jacobsthalVec.push_back(calculateJacobsthal(i));
 	}
+	// Create jacob array based on size of pair arr size
+	// From pend array, take jacobsth->second and use binary insertion
+
+	// Insert numbers from pend chain in Jacobsthal's order
+	for (int& jacobstalth : jacobsthalVec)
+	{
+		if ((size_t)jacobstalth < pend.size())
+		{
+			auto numberToInsert = pend[jacobstalth];
+			auto itIndex = std::lower_bound(main.begin(), main.end(), numberToInsert);
+			main.insert(itIndex, numberToInsert);
+			auto it = std::find(pend.begin(), pend.end(), numberToInsert);
+			if (it != pend.end())
+				pend.erase(it);
+		}
+	}
+
+	// Insert remaining elements from pend chain
+	for (auto & itNumber : pend)
+	{
+		auto it = std::lower_bound(main.begin(), main.end(), itNumber);
+		main.insert(it, itNumber);
+	}	
+
+	// Insert odd number
 	if (oddOne != -1)
 	{
 		auto it = std::lower_bound(main.begin(), main.end(), oddOne);
 		main.insert(it, oddOne);
 		// main.insert(main.begin() + binaryInsertion(main, oddOne), oddOne);
 	}
+	// elements.clear();
+	// std::copy(main.begin(), main.end(), elements.begin());
 	elements = main;
     std::chrono::high_resolution_clock::time_point end_timer = std::chrono::high_resolution_clock::now();
-    auto deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end_timer - start_timer).count();
-	std::cout << deltaTime << std::endl;
+    double deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end_timer - start_timer).count();
+	deltaTime /= 10000;
+	printvariable(elements);
+	printVector(elements);
+	std::cout << "us: " << deltaTime << std::endl;
 }
 
 
