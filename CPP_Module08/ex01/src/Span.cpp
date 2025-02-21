@@ -1,5 +1,6 @@
 #include "Span.hpp"
 #include <algorithm>
+#include <set>
 #include <stdexcept>
 #include <iostream>
 #include <climits>

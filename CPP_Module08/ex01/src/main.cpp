@@ -104,10 +104,10 @@ void	testSubject()
 int main(void)
 {
 	testSubject();
-	// testOverflowingSpan();
-	// testShortestAndLongestSpan();
-	// testAddingSingleNumber();
-	// testAddingRangeOfNumbers();
-	// testAddingRangeOfNumbersOverflowing();
-	// testBigNumbers(10000);
+	testOverflowingSpan();
+	testShortestAndLongestSpan();
+	testAddingSingleNumber();
+	testAddingRangeOfNumbers();
+	testAddingRangeOfNumbersOverflowing();
+	testBigNumbers(10000);
 }

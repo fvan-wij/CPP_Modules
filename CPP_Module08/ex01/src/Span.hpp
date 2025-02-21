@@ -1,7 +1,5 @@
 #pragma once
 
-#include <set>
-
 class Span
 {
 	public:
@@ -19,7 +17,6 @@ class Span
 
 	private:
 		int				*_storage;
-		// std::set<int>	_storage;
 		unsigned int	_currentIndex;
 		unsigned int 	_N;
 };
