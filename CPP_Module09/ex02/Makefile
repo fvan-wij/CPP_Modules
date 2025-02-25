@@ -13,7 +13,7 @@ SRC			:= 	$(addprefix $(SRCDIR)/,$(SRC))
 EXERCISE	:= $(shell basename $(PWD))
 
 ifdef DEBUG
-	FLAGS += -g -fsanitize=address
+	FLAGS += -g
 endif
 
 all: $(NAME)
@@ -21,7 +21,7 @@ all: $(NAME)
 run: all
 
 $(NAME): $(OBJ)
-	@$(COMPILER) $^ -o $(NAME)
+	@$(COMPILER) $(FLAGS) $^ -o $(NAME)
 	@echo $(Green) $(Bold) C++ $(EXERCISE) compiled ✅ $(Text_Off)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
