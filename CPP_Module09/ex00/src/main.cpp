@@ -39,6 +39,11 @@ bool	validDate(const std::string& date)
 
 void	calcExchangeRatesFromFile(std::filesystem::path inputFile, BitcoinExchange& handler)
 {
+	if (!handler.getPriceMap())
+	{
+		std::cerr << "Error: handler doesn't contain a valid price map" << std::endl;
+		return; 
+	}
 	std::string line;
 	float		value = 0.0f;
 	std::ifstream inFile(inputFile);

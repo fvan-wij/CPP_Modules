@@ -3,46 +3,33 @@
 #include <fstream>
 #include <iostream>
 
-std::chrono::system_clock::time_point	BitcoinExchange::stringToDate(const std::string& dateStr)
+BitcoinExchange::BitcoinExchange()
 {
-    std::tm tm = {};
-    std::stringstream ss(dateStr);
-    ss >> std::get_time(&tm, "%Y-%m-%d");
-    
-    if (ss.fail())
-	{
-        throw std::invalid_argument("Invalid date format");
-    }
-
-    std::chrono::system_clock::time_point tp = std::chrono::system_clock::from_time_t(std::mktime(&tm));
-    return tp;
-
+	
 }
 
 BitcoinExchange::BitcoinExchange(const std::filesystem::path& exchangeDataPath)
 {
-	if (exchangeDataPath.extension() != ".csv")
-	{
-		throw std::invalid_argument("Incorrect extension: " + exchangeDataPath.extension().string());
-	}
+	parseExchangeData(exchangeDataPath);
+}
 
-	std::ifstream file(exchangeDataPath);
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) : _priceMap(other._priceMap)
+{
+	
+}
 
-	if (not file.good())
-	{
-		throw std::runtime_error("Error opening file: " + exchangeDataPath.filename().string());
-	}
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+{
+	if (this == &other)
+		return *this;
 
-	std::string line;
-	while(std::getline(file, line))
-	{
-		if (line != "date,exchange_rate" && not line.empty())
-		{
-			std::string key = line.substr(0, line.find(","));
-			double value = std::stod(line.substr(line.find(",") + 1));
-			_priceMap.insert({stringToDate(key), value});
-		}
-	}
+	this->_priceMap = other._priceMap;
+	return *this;
+}
+
+BitcoinExchange::~BitcoinExchange()
+{
+
 }
 
 void BitcoinExchange::printPriceMap()
@@ -58,9 +45,46 @@ void BitcoinExchange::printPriceMap()
 	}
 }
 
+void	BitcoinExchange::parseExchangeData(const std::filesystem::path& path)
+{
+	if (path.extension() != ".csv")
+	{
+		throw std::invalid_argument("Incorrect extension: " + path.extension().string());
+	}
+
+	std::ifstream file(path);
+
+	if (not file.good())
+	{
+		throw std::runtime_error("Error opening file: " + path.filename().string());
+	}
+
+	std::string line;
+	while(std::getline(file, line))
+	{
+		if (line != "date,exchange_rate" && not line.empty())
+		{
+			std::string key = line.substr(0, line.find(","));
+			double value = std::stod(line.substr(line.find(",") + 1));
+			auto timePoint = stringToDate(key);
+			_priceMap.insert({timePoint, value});
+		}
+	}
+}
+
+std::optional<std::map<std::chrono::system_clock::time_point, double>> BitcoinExchange::getPriceMap()
+{
+	if (_priceMap.empty())
+	{
+		return std::nullopt;
+	}
+
+	return _priceMap;
+}
+
 std::optional<double>	BitcoinExchange::getPriceAtDate(const std::string& date)
 {
-	auto tpDate = stringToDate(date);
+	auto tpDate = stringToDate(date); // tp == time_point (std::chrono)
 
 	if (_priceMap.find(tpDate) != _priceMap.end()) // Is present
 	{
@@ -88,7 +112,18 @@ std::optional<double>	BitcoinExchange::getPriceAtDate(const std::string& date)
 	}
 }
 
-BitcoinExchange::~BitcoinExchange()
+std::chrono::system_clock::time_point	BitcoinExchange::stringToDate(const std::string& dateStr)
 {
+    std::tm tm = {};
+    std::stringstream ss(dateStr);
+    ss >> std::get_time(&tm, "%Y-%m-%d");
+    
+    if (ss.fail())
+	{
+        throw std::invalid_argument("Invalid date format");
+    }
 
+    std::chrono::system_clock::time_point tp = std::chrono::system_clock::from_time_t(std::mktime(&tm));
+    return tp;
 }
+
