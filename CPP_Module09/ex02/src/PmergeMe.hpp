@@ -64,8 +64,6 @@ void PmergeMe::mergeInsertionSort(T& elements)
 		oddOne = elements.back();
 		elements.pop_back();
 	}
-
-	// Check if T is vector or deque
 	using PairContainer = typename std::conditional< 
 		std::is_same<T, std::vector<int>>::value, // Condition
 		std::vector<std::pair<int, int>>, // Type if true (TrueType)
@@ -74,6 +72,7 @@ void PmergeMe::mergeInsertionSort(T& elements)
 
 	PairContainer pairs;
 
+	// Determine the larger of each pair
 	for (auto it = elements.begin(); it != elements.end(); it++)
 	{
 		std::pair p {*it, *(++it)};
@@ -86,7 +85,6 @@ void PmergeMe::mergeInsertionSort(T& elements)
 	_mergeSort(pairs, 0, pairs.size() - 1);
 
 
-	// Create main and pend chain
 	T main, pend;
 	for (auto it = pairs.begin(); it != pairs.end(); it++)
 	{
@@ -98,7 +96,7 @@ void PmergeMe::mergeInsertionSort(T& elements)
 	main.insert(main.begin(), pend[0]);
 	pend.erase(pend.begin());
 
-	// From pend array, take pend[jacobsth] and use binary insertion
+	// From pend array, take pend[jacobsthal] and use binary insertion
 	// Insert numbers from pend chain in Jacobsthal's order
 	for (const size_t& jacobsthal : JACOBSTHAL_SEQUENCE)
 	{
@@ -113,11 +111,11 @@ void PmergeMe::mergeInsertionSort(T& elements)
 		}
 	}
 
-	// Insert remaining elements from pend chain
-	for (auto & itNumber : pend)
+	// Insert remaining elements from pend chain in reverse order
+	for (auto itNumber = pend.rbegin(); itNumber != pend.rend(); itNumber++)
 	{
-		auto it = std::lower_bound(main.begin(), main.end(), itNumber);
-		main.insert(it, itNumber);
+		auto it = std::lower_bound(main.begin(), main.end(), *itNumber);
+		main.insert(it, *itNumber);
 	}	
 
 	// Insert odd number
